@@ -169,7 +169,7 @@
 
             // If a link is provided, add it to the popup
             if (link) {
-                popupContent += `<br><a href="${link}" target="_blank" style="color: blue; text-decoration: underline;">More Info</a>`;
+                popupContent += `<br><a href="${link}" target="_blank" style="color: blue; text-decoration: underline;">Show Map</a>`;
             }
 
             const marker = L.marker([y, x], { icon: createCustomMarker(iconUrl, newSize, name, textColor, iconColor), bubblingMouseEvents: false })// Prevents mouse events from propagating to the map
@@ -187,6 +187,7 @@
             addPin("High Road", "Bank, Priest, Stable", 1600, 880, 'Icons/SHIcon.svg', 'white', 'white'),
             addPin("Back Road", "Bank, Priest, Stable", 1600, 830, 'Icons/SHIcon.svg', 'white', 'white'),
             addPin("Sams Pond", "Bank, Priest, MagicEmp", 1080, 590, 'Icons/VillageIcon.svg', 'white', 'white'),
+            addPin("Veinhold", "", 1115, 695, 'Icons/SHIcon.svg', 'white', 'white'),
             addPin("Isengard", "MagicEmp", 1295, 680, 'Icons/SHIcon.svg', 'white', 'white'),
             addPin("JSH", "Elvans Atelier: Bank, Priest, MagicEmp", 2300, 550, 'Icons/VillageIcon.svg', 'white', 'white'),
             addPin("Kill All Sators", "", 2370, 540, 'Icons/SHIcon.svg', 'white', 'white'),
@@ -228,6 +229,7 @@
             addPin("Mana Island", "", 2300, 320, 'Icons/TorchIcon.svg', 'white', 'white'),
             addPin("Mana Crack", "", 2300, 420, 'Icons/TorchIcon.svg', 'white', 'white'),
             addPin("Calx Falls", "", 2055, 490, 'Icons/TorchIcon.svg', 'white', 'white'),
+            addPin("Kelp Lake", "", 1220, 870, 'Icons/TorchIcon.svg', 'white', 'white'),
             
             //NPC - purple
             addPin("Bakti", "", 1990, 1210, 'Icons/VillageIcon.svg', 'white', 'purple'),
@@ -249,19 +251,24 @@
             addPin("Nitre Spider Cave", "Here Petbroker bully spider", 1390, 1350, 'Icons/DungeonIcon.svg', 'white', 'white'),
             addPin("Mino Dungeon", "Mouth of Gal Barag", 1880, 3550, 'Icons/DungeonIcon.svg', 'blue', 'blue'),
             addPin("Undercroft", "", 1645, 2120, 'Icons/DungeonIcon.svg', 'white', 'white'),
-           
+            addPin("Sanctum", "Sylvan Sanctum", 2190, 2975, 'Icons/DungeonIcon.svg', 'blue', 'white', 'https://destillaah.github.io/MortalARTmap//SylvanSanctum.html'),
+            
             //POI - red
-            addPin("TF POI", "Sidoian", 1550, 530, 'Icons/SwordIcon.svg', 'red', 'red'),
+            addPin("TF POI", "Sidoian, Temple Key-Bottom(Piece)", 1550, 530, 'Icons/SwordIcon.svg', 'red', 'red'),
             addPin("Bandit POI", "", 1950, 630, 'Icons/SwordIcon.svg', 'red', 'red'),
             addPin("NecroPOI", "", 1130, 965, 'Icons/SwordIcon.svg', 'red', 'red'),
             addPin("TreeHouse POI", "", 2900, 530, 'Icons/SwordIcon.svg', 'white', 'red'),
+            addPin("Big POI", "Sidoian", 950, 880, 'Icons/SwordIcon.svg', 'red', 'red'),
+            addPin("Sid POI", "Sidoian, Temple Key-Middle(Piece)", 3030, 870, 'Icons/SwordIcon.svg', 'red', 'red'),
             
             //Horses - white
             addPin("Jungle", "", 1530, 1140, 'Icons/HorseIcon.svg', 'white', 'white'),
             addPin("Jungle", "", 2305, 570, 'Icons/HorseIcon.svg', 'white', 'white'),
-
+            addPin("Jungle", "", 1090, 820, 'Icons/HorseIcon.svg', 'white', 'white'),
+            
             // Pillows - pink
             addPin("Sator Beach", "PILLOWS Bank, Priest, Stable", 2040, 380, 'Icons/VillageIcon.svg', 'white', 'pink'),
+            addPin("Pachinki", "", 1025, 695, 'Icons/SHIcon.svg', 'white', 'pink'),
             
             //Grimside - blue
             addPin("Grimside Village", "Bank, Priest", 2340, 610, 'Icons/VillageIcon.svg', 'white', 'blue'),
@@ -269,10 +276,15 @@
             //Tribe - lime green
             addPin("Panther Village", "", 2780, 580, 'Icons/VillageIcon.svg', 'white', 'lime'),
             
-            
             // Other ally pins - cyan
             addPin("MonkFish", "", 1960, 515, 'Icons/VillageIcon.svg', 'cyan', 'cyan'),
             addPin("NewDawn Campos", "", 1590, 290, 'Icons/VillageIcon.svg', 'cyan', 'cyan'),
+            
+            //No Allies - find color
+            addPin("Ruin/FreeCompany Village", "", 1070, 800, 'Icons/VillageIcon.svg', 'red', 'red'),
+            addPin("Big POI Village", "", 880, 880, 'Icons/VillageIcon.svg', 'red', 'red'),
+            addPin("HedgeKnights", "", 950, 965, 'Icons/VillageIcon.svg', 'red', 'red'),
+            addPin("Koto Village", "", 945, 760, 'Icons/SHIcon.svg', 'red', 'red'),
         ];
 
         // Function to update icon sizes when zooming
