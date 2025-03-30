@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momo's Monster Map</title>
+
+    <!-- Leaflet.js CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #map {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .custom-marker {
+            position: relative;
+        }
+
+        .marker-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* Pin name style (always below the marker) */
+        .pin-name {
+            font-size: 1rem;
+            font-weight: bold;
+            min-width: 8ch;
+        }
+
+        /* Prevent scaling of popups */
+        .leaflet-popup-content {
+            font-size: 16px;
+            width: auto;
+            max-width: 500px;
+            min-width: 300px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .leaflet-popup-tip {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Map Container -->
+    <div id="map"></div>
+
+    <!-- Leaflet.js Library -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        // Initialize the map
+        const map = L.map('map', {
+            maxZoom: 3,
+            center: [0, 0],
+            crs: L.CRS.Simple
+        });
+
+        // Custom map image
+        const imageUrl = 'Images/MOMap.png';  //Map image
+        const imageSize = [4096, 4096];  // Dimensions of your map image
+
+        // Define map bounds
+        const bounds = [[0, 0], [imageSize[1], imageSize[0]]];
+        L.imageOverlay(imageUrl, bounds).addTo(map);
+        map.fitBounds(bounds);
+
+        // Function to create a custom scalable marker
+        function createCustomMarker(iconUrl, size, name, textColor, iconColor) {
+            const iconDiv = document.createElement('div');
+            iconDiv.className = 'marker-content';
+
+            // Marker image part
+            const iconImg = document.createElement('div');
+            iconImg.className = 'marker-img';
+            iconImg.style.backgroundImage = `url('${iconUrl}')`;
+            iconImg.style.width = `${size}px`;
+            iconImg.style.height = `${size}px`;
+
+            //Apply color filter to svg images
+            if (iconUrl.endsWith('.svg')) {
+                let filterValue = '';
+
+                switch (iconColor) {
+                    case 'red':
+                        filterValue = 'invert(14%) sepia(99%) saturate(7498%) hue-rotate(0deg) brightness(104%) contrast(107%)';
+                        break;
+                    case 'purple': 
+                        filterValue = 'invert(30%) sepia(80%) saturate(4000%) hue-rotate(250deg) brightness(110%) contrast(107%)'; 
+                        break;    
+                    case 'blue':
+                        filterValue = 'invert(33%) sepia(75%) saturate(2000%) hue-rotate(220deg) brightness(95%) contrast(105%)';
+                        break;
+                    case 'green':
+                        filterValue = 'invert(48%) sepia(78%) saturate(800%) hue-rotate(90deg) brightness(90%) contrast(110%)';
+                        break;
+                    case 'lime':
+                        filterValue = 'invert(90%) sepia(100%) saturate(1200%) hue-rotate(30deg) brightness(110%) contrast(95%)';
+                        break;
+                    case 'black':
+                        filterValue = 'invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(0%) contrast(100%)';
+                        break;
+                    case 'white':
+                        filterValue = 'invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)';
+                        break;
+                    case 'pink':
+                        filterValue = 'invert(90%) sepia(50%) saturate(3000%) hue-rotate(300deg) brightness(105%) contrast(100%)';
+                        break;
+                    case 'cyan':
+                        filterValue = 'invert(75%) sepia(50%) saturate(2000%) hue-rotate(150deg) brightness(140%) contrast(200%)';
+                        break;
+                    case 'lime':
+                        filterValue = 'invert(60%) sepia(80%) saturate(1000%) hue-rotate(70deg) brightness(110%) contrast(100%)';
+                        break;
+                    case 'brown': 
+                        filterValue = 'invert(27%) sepia(49%) saturate(500%) hue-rotate(10deg) brightness(90%) contrast(90%)'; 
+                        break;    
+                    default:
+                        filterValue = 'invert(100%)'; // Default to white
+                }
+
+                iconImg.style.filter = `invert(100%) ${filterValue}`; // Invert first to make it black, then apply color
+            }
+
+            // Name part
+            const nameLabel = document.createElement('div');
+            nameLabel.className = 'pin-name';
+            nameLabel.innerHTML = name;
+            nameLabel.style.color = textColor;
+
+            // Append the name below the icon
+            iconDiv.appendChild(iconImg);
+            iconDiv.appendChild(nameLabel);
+
+            return L.divIcon({
+                className: 'custom-marker',
+                html: iconDiv.outerHTML,
+                iconSize: [size, size], // Adjust size to include the name below the marker
+                iconAnchor: [size, size], // Anchor to center the marker
+                popupAnchor: [0, -(size + 25)] // Popup opens above the marker with room for the name
+            });
+        }
+
+        // Function to add a pin with a scalable icon and visible name
+        function addPin(name, description, x, y, iconUrl, textColor, iconColor, link = '') {
+            const zoom = map.getZoom();
+            const baseSize = 230; // Default icon size at zoom level 2
+            const scaleFactor = Math.pow((zoom + 1) / 10, 1); // Adjust this for smoother scaling
+            const newSize = baseSize / scaleFactor;
+
+            let popupContent = `<strong>${name}</strong><br>${description}`;
+
+            // If a link is provided, add it to the popup
+            if (link) {
+                popupContent += `<br><a href="${link}" target="_blank" style="color: blue; text-decoration: underline;">Show Map</a>`;
+            }
+
+            const marker = L.marker([y, x], { icon: createCustomMarker(iconUrl, newSize, name, textColor, iconColor), bubblingMouseEvents: false })// Prevents mouse events from propagating to the map
+                .addTo(map)
+                .bindPopup(popupContent);
+            return { marker, iconUrl, x, y, baseSize, name, textColor, iconColor };
+        }
+
+        // List of markers
+        const markers = [
+
+            //addPin("Title", "Description", xCoords, yCoords, Icon Link, textColor, iconColor),
+            addPin("Example", "Write more info here!", 2048, 2048, 'Icons/VillageIcon.svg', 'cyan', 'cyan'),
+            
+         
+            
+            
+        ];
+
+        // Function to update icon sizes when zooming
+        function updateIconSizes() {
+            const zoom = map.getZoom();
+            const scaleFactor = Math.pow((zoom + 1) / 10, 1); // Adjust scaling here
+
+            markers.forEach(({ marker, iconUrl, x, y, baseSize, name, textColor, iconColor }) => {
+                const newSize = baseSize * scaleFactor;
+                marker.setIcon(createCustomMarker(iconUrl, newSize, name, textColor, iconColor));
+            });
+        }
+
+        // Listen for zoom events
+        map.on('zoomend', updateIconSizes);
+        updateIconSizes(); // Initialize scaling
+
+    </script>
+
+</body>
+
+</html>
