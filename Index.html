@@ -23,6 +23,25 @@
             height: 100vh;
         }
 
+        #toggle-overlay {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 18px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #toggle-overlay:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        
+        
+        
         .custom-marker {
             position: relative;
         }
@@ -64,27 +83,35 @@
 
     <!-- Map Container -->
     <div id="map"></div>
-
+    
+    <button id="toggle-overlay">Priest Zones</button>
     <!-- Leaflet.js Library -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
         // Initialize the map
         const map = L.map('map', {
-            maxZoom: 3,
+            //minZoom: -1,
+            maxZoom: 3, 
             center: [0, 0],
             crs: L.CRS.Simple
         });
-
+        
         // Custom map image
         const imageUrl = 'Images/MOMap.png';  //Map image
         const imageSize = [4096, 4096];  // Dimensions of your map image
-
-        // Define map bounds
         const bounds = [[0, 0], [imageSize[1], imageSize[0]]];
         L.imageOverlay(imageUrl, bounds).addTo(map);
+        
+        // Define overlay image (same size as base)
+        const overlayUrl = 'Images/MOPriestZones.png';       
+        const overlayLayer = L.imageOverlay(overlayUrl, bounds, { opacity: 1 });
+        let overlayVisible = false; // Start hidden  
+        
+        // Define map bounds
+        
         map.fitBounds(bounds);
-
+        
         // Function to create a custom scalable marker
         function createCustomMarker(iconUrl, size, name, textColor, iconColor) {
             const iconDiv = document.createElement('div');
@@ -263,7 +290,9 @@
             addPin("Morin Khur", "", 3280, 2623, 'Icons/VillageIcon.svg', 'white', 'purple'),
             addPin("Toxai", "", 3645, 2500, 'Icons/VillageIcon.svg', 'white', 'purple'),
             addPin("Cave Camp", "", 2460, 3330, 'Icons/VillageIcon.svg', 'white', 'purple'),
+            
             addPin("Jungle Camp", "", 2800, 550, 'Icons/VillageIcon.svg', 'white', 'purple'),
+            addPin("Kranesh", "", 1550, 2960, 'Icons/VillageIcon.svg', 'white', 'purple'),
             
             //Dungeons - white
             addPin("Shinarian Labyrinth", "Jungle Dungeon", 2570, 600, 'Icons/DungeonIcon.svg', 'white', 'white', 'https://destillaah.github.io/MortalARTmap//ShinarianLabyrinth.html'),
@@ -281,7 +310,7 @@
             addPin("TreeHouse POI", "", 2900, 530, 'Icons/SwordIcon.svg', 'white', 'red'),
             addPin("Big POI", "Sidoian", 950, 880, 'Icons/SwordIcon.svg', 'red', 'red'),
             addPin("Vilehaunt POI", "Sidoian, Temple Key-Middle(Piece)", 3030, 870, 'Icons/SwordIcon.svg', 'red', 'red'),
-            addPin("Sid POI", "Sidoian, Temple Key-Top(Piece)", 3290, 670, 'Icons/SwordIcon.svg', 'red', 'red'),
+            addPin("Sid POI", "Sidoian, Temple Key-Top(Piece)", 3260, 680, 'Icons/SwordIcon.svg', 'red', 'red'),
             addPin("Jungle Temple", "", 895, 610, 'Icons/SwordIcon.svg', 'red', 'red'),
             addPin("Sator Tree", "", 2890, 665, 'Icons/SwordIcon.svg', 'red', 'red'),
             addPin("RuinsBandits", "", 2815, 720, 'Icons/SwordIcon.svg', 'red', 'red'),
@@ -365,6 +394,21 @@
             addPin("Wolf", "", 1460, 890, 'Icons/SHIcon.svg', 'white', 'white'),
             addPin("DirtyDozen", "", 1480, 575, 'Icons/VillageIcon.svg', 'white', 'white'),
             addPin("Got Clowned", "", 2770, 560, 'Icons/SkullIcon.svg', 'red', 'red'),
+          
+            
+            //Red Priests
+            addPin("", "Turtle beach Red Priest", 1100, 260, 'Icons/PriestIcon.svg', 'red', 'red'),
+            addPin("", "SV Red Priest", 1355, 1160, 'Icons/PriestIcon.svg', 'red', 'red'),
+            addPin("", "East Jung Red Priest", 3290, 650, 'Icons/PriestIcon.svg', 'red', 'red'),
+            addPin("", "Bakti Red Priest", 2680, 1220, 'Icons/PriestIcon.svg', 'red', 'red'),
+            addPin("", "Mohki Red Priest", 3290, 1740, 'Icons/PriestIcon.svg', 'red', 'red'),
+            addPin("", "Colored Forest Red Priest", 1200, 2500, 'Icons/PriestIcon.svg', 'red', 'red'),
+            addPin("", "Central Steppe Red Priest", 2360, 2275, 'Icons/PriestIcon.svg', 'red', 'red'),
+            addPin("", "Khurite Fishing Village Red Priest", 3390, 2100, 'Icons/PriestIcon.svg', 'red', 'red'),
+            addPin("", "Northern Steppe Red Priest", 2540, 3095, 'Icons/PriestIcon.svg', 'red', 'red'),
+            addPin("", "Santa Red Priest", 1225, 3815, 'Icons/PriestIcon.svg', 'red', 'red'),
+            
+            
             
         ];
 
@@ -382,9 +426,25 @@
         // Listen for zoom events
         map.on('zoomend', updateIconSizes);
         updateIconSizes(); // Initialize scaling
-
+     
+    document.getElementById('toggle-overlay').addEventListener('click', function () {
+    if (overlayVisible) 
+    {
+        map.removeLayer(overlayLayer);
+        this.textContent = 'Show Overlay';
+    } 
+    else 
+    {
+        overlayLayer.addTo(map);
+        this.textContent = 'Hide Overlay';
+    }
+    overlayVisible = !overlayVisible;
+    });    
+        
+        
     </script>
-
+  
+   
 </body>
 
 </html>
