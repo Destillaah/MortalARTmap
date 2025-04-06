@@ -154,6 +154,16 @@
         <!--These are the filter panels-->
         <div id="filter-panel">
             <div class="filter-category">
+                <div class="filter-title">Common</div>
+                <div class="filter-options">
+                    <label><input type="checkbox" value="NPC" checked> Towns</label>
+                    <label><input type="checkbox" value="RPriest" checked> Red Priest</label>
+                    <label><input type="checkbox" value="Dung" checked> Dungeons</label>
+                    <label><input type="checkbox" value="Keeps" checked> Keeps</label>
+                    <!-- Add more here -->
+                </div>
+            </div>
+            <div class="filter-category">
                 <div class="filter-title">Guilds</div>
                 <div class="filter-options">
                     <label><input type="checkbox" value="ART"> Artisans</label>
@@ -163,7 +173,6 @@
                     <label><input type="checkbox" value="IF"> ImperiumFerro</label>
                 </div>
             </div>
-
             <div class="filter-category">
                 <div class="filter-title">Content</div>
                 <div class="filter-options">
@@ -172,6 +181,7 @@
                     <!-- Add more here -->
                 </div>
             </div>
+            
         </div>
     </div>
     
@@ -296,7 +306,7 @@
                 }
             });
         }
-        let activeTags = new Set(); // initially show all
+        let activeTags = new Set(['NPC', 'RPriest', 'Dung', 'Keeps']); // initially show all
         
         
         // Function to add a pin with a scalable icon and visible name
@@ -359,16 +369,16 @@
             addPin("Panthoff", "MagicEmp", 2785, 585, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
             
             //Keeps
-            addPin("Artisan Keep", "WTB Granum", 1470, 750, 'Icons/KeepIcon.svg', 'white', 'white'),
-            addPin("Legio Keep", "King Petbroker's domain", 570, 530, 'Icons/KeepIcon.svg', 'cyan', 'cyan'),
-            addPin("Grimside Keep", "", 2295, 1390, 'Icons/KeepIcon.svg', 'cyan', 'cyan'),
-            addPin("NewDawn Keep", "", 3020, 1345, 'Icons/KeepIcon.svg', 'cyan', 'cyan'),
-            addPin("Imperial Dreams Keep", "", 3490, 1325, 'Icons/KeepIcon.svg', 'white', 'white'),
-            addPin("OdinSeed", "", 2190, 3450, 'Icons/KeepIcon.svg', 'cyan', 'cyan'),
-            addPin("OdinSeed2", "", 2200, 2720, 'Icons/KeepIcon.svg', 'cyan', 'cyan'),
-            addPin("Empire", "", 3080, 2210, 'Icons/KeepIcon.svg', 'white', 'white'),
-            addPin("BadCo Keep", "", 1985, 1900, 'Icons/KeepIcon.svg', 'white', 'white'),
-            addPin("xESx", "", 935, 1395, 'Icons/KeepIcon.svg', 'white', 'white'),
+            addPin("Artisan Keep", "WTB Granum", 1470, 750, 'Icons/KeepIcon.svg', 'white', 'white', '', ['Keeps']),
+            addPin("Legio Keep", "King Petbroker's domain", 570, 530, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
+            addPin("Grimside Keep", "", 2295, 1390, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
+            addPin("NewDawn Keep", "", 3020, 1345, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
+            addPin("Imperial Dreams Keep", "", 3490, 1325, 'Icons/KeepIcon.svg', 'white', 'white', '', ['Keeps']),
+            addPin("OdinSeed", "", 2190, 3450, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
+            addPin("OdinSeed2", "", 2200, 2720, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
+            addPin("Empire", "", 3080, 2210, 'Icons/KeepIcon.svg', 'white', 'white', '', ['Keeps']),
+            addPin("BadCo Keep", "", 1985, 1900, 'Icons/KeepIcon.svg', 'white', 'white', '', ['Keeps']),
+            addPin("xESx", "", 935, 1395, 'Icons/KeepIcon.svg', 'white', 'white', '', ['Keeps']),
             
             //Call outs - white torch
             addPin("Kush", "Priest, Bank, Stables", 2610, 580, 'Icons/VillageIcon.svg', 'white', 'white'),   
@@ -396,28 +406,28 @@
             addPin("Bakti River", "", 1805, 1175, 'Icons/TorchIcon.svg', 'white', 'white'),
             
             //NPC - purple
-            addPin("Bakti", "", 1990, 1210, 'Icons/VillageIcon.svg', 'white', 'purple'),
-            addPin("Mohki", "", 2680, 1790, 'Icons/VillageIcon.svg', 'white', 'purple'),
-            addPin("Vadda", "", 1690, 1810, 'Icons/VillageIcon.svg', 'white', 'purple'),
-            addPin("Meduli", "", 430, 2123, 'Icons/VillageIcon.svg', 'white', 'purple'),
-            addPin("Tindrem", "", 500, 3130, 'Icons/VillageIcon.svg', 'blue', 'purple'),
-            addPin("Fabernum", "", 1300, 3200, 'Icons/VillageIcon.svg', 'white', 'purple'),
-            addPin("Hyllspeia", "", 1320, 3580, 'Icons/VillageIcon.svg', 'blue', 'purple'),
-            addPin("Morin Khur", "", 3280, 2623, 'Icons/VillageIcon.svg', 'white', 'purple'),
-            addPin("Toxai", "", 3645, 2500, 'Icons/VillageIcon.svg', 'white', 'purple'),
-            addPin("Cave Camp", "", 2460, 3330, 'Icons/VillageIcon.svg', 'white', 'purple'),
+            addPin("Bakti", "", 1990, 1210, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
+            addPin("Mohki", "", 2680, 1790, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
+            addPin("Vadda", "", 1690, 1810, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
+            addPin("Meduli", "", 430, 2123, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
+            addPin("Tindrem", "", 500, 3130, 'Icons/VillageIcon.svg', 'blue', 'purple', '', ['NPC']),
+            addPin("Fabernum", "", 1300, 3200, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
+            addPin("Hyllspeia", "", 1320, 3580, 'Icons/VillageIcon.svg', 'blue', 'purple', '', ['NPC']),
+            addPin("Morin Khur", "", 3280, 2623, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
+            addPin("Toxai", "", 3645, 2500, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
+            addPin("Cave Camp", "", 2460, 3330, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
             
-            addPin("Jungle Camp", "", 2800, 550, 'Icons/VillageIcon.svg', 'white', 'purple'),
-            addPin("Kranesh", "", 1550, 2960, 'Icons/VillageIcon.svg', 'white', 'purple'),
+            addPin("Jungle Camp", "", 2800, 550, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
+            addPin("Kranesh", "", 1550, 2960, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
             
             //Dungeons - white
-            addPin("Shinarian Labyrinth", "Jungle Dungeon", 2570, 600, 'Icons/DungeonIcon.svg', 'white', 'white', 'https://destillaah.github.io/MortalARTmap//ShinarianLabyrinth.html'),
-            addPin("Sator Dungeon", "Jungle Dungeon", 2170, 390, 'Icons/DungeonIcon.svg', 'white', 'white'),
-            addPin("Melissars Vault", "", 490, 1700, 'Icons/DungeonIcon.svg', 'white', 'white'),
-            addPin("Nitre Spider Cave", "Here Petbroker bully spider", 1390, 1350, 'Icons/DungeonIcon.svg', 'white', 'white'),
-            addPin("Mino Dungeon", "Mouth of Gal Barag", 1880, 3550, 'Icons/DungeonIcon.svg', 'blue', 'blue'),
-            addPin("Undercroft", "", 1645, 2120, 'Icons/DungeonIcon.svg', 'white', 'white'),
-            addPin("Sanctum", "Sylvan Sanctum", 2190, 2975, 'Icons/DungeonIcon.svg', 'blue', 'white', 'https://destillaah.github.io/MortalARTmap//SylvanSanctum.html'),
+            addPin("Shinarian Labyrinth", "Jungle Dungeon", 2570, 600, 'Icons/DungeonIcon.svg', 'white', 'white', 'https://destillaah.github.io/MortalARTmap//ShinarianLabyrinth.html', ['Dung']),
+            addPin("Sator Dungeon", "Jungle Dungeon", 2170, 390, 'Icons/DungeonIcon.svg', 'white', 'white', '', ['Dung']),
+            addPin("Melissars Vault", "", 490, 1700, 'Icons/DungeonIcon.svg', 'white', 'white', '', ['Dung']),
+            addPin("Nitre Spider Cave", "Here Petbroker bully spider", 1390, 1350, 'Icons/DungeonIcon.svg', 'white', 'white', '', ['Dung']),
+            addPin("Mino Dungeon", "Mouth of Gal Barag", 1880, 3550, 'Icons/DungeonIcon.svg', 'blue', 'blue', '', ['Dung']),
+            addPin("Undercroft", "", 1645, 2120, 'Icons/DungeonIcon.svg', 'white', 'white', '', ['Dung']),
+            addPin("Sanctum", "Sylvan Sanctum", 2190, 2975, 'Icons/DungeonIcon.svg', 'blue', 'white', 'https://destillaah.github.io/MortalARTmap//SylvanSanctum.html', ['Dung']),
             
             //POI - red
             addPin("TF POI", "Sidoian, Temple Key-Bottom(Piece)", 1550, 530, 'Icons/SwordIcon.svg', 'red', 'red', '', ['POI']),
@@ -513,16 +523,16 @@
           
             
             //Red Priests
-            addPin("", "Turtle beach Red Priest", 1100, 260, 'Icons/PriestIcon.svg', 'red', 'red'),
-            addPin("", "SV Red Priest", 1355, 1160, 'Icons/PriestIcon.svg', 'red', 'red'),
-            addPin("", "East Jung Red Priest", 3290, 650, 'Icons/PriestIcon.svg', 'red', 'red'),
-            addPin("", "Bakti Red Priest", 2680, 1220, 'Icons/PriestIcon.svg', 'red', 'red'),
-            addPin("", "Mohki Red Priest", 3290, 1740, 'Icons/PriestIcon.svg', 'red', 'red'),
-            addPin("", "Colored Forest Red Priest", 1200, 2500, 'Icons/PriestIcon.svg', 'red', 'red'),
-            addPin("", "Central Steppe Red Priest", 2360, 2275, 'Icons/PriestIcon.svg', 'red', 'red'),
-            addPin("", "Khurite Fishing Village Red Priest", 3390, 2100, 'Icons/PriestIcon.svg', 'red', 'red'),
-            addPin("", "Northern Steppe Red Priest", 2540, 3095, 'Icons/PriestIcon.svg', 'red', 'red'),
-            addPin("", "Santa Red Priest", 1225, 3815, 'Icons/PriestIcon.svg', 'red', 'red','',[]),
+            addPin("", "Turtle beach Red Priest", 1100, 260, 'Icons/PriestIcon.svg', 'red', 'red', '', ['RPriest']),
+            addPin("", "SV Red Priest", 1355, 1160, 'Icons/PriestIcon.svg', 'red', 'red', '', ['RPriest']),
+            addPin("", "East Jung Red Priest", 3290, 650, 'Icons/PriestIcon.svg', 'red', 'red', '', ['RPriest']),
+            addPin("", "Bakti Red Priest", 2680, 1220, 'Icons/PriestIcon.svg', 'red', 'red', '', ['RPriest']),
+            addPin("", "Mohki Red Priest", 3290, 1740, 'Icons/PriestIcon.svg', 'red', 'red', '', ['RPriest']),
+            addPin("", "Colored Forest Red Priest", 1200, 2500, 'Icons/PriestIcon.svg', 'red', 'red', '', ['RPriest']),
+            addPin("", "Central Steppe Red Priest", 2360, 2275, 'Icons/PriestIcon.svg', 'red', 'red', '', ['RPriest']),
+            addPin("", "Khurite Fishing Village Red Priest", 3390, 2100, 'Icons/PriestIcon.svg', 'red', 'red', '', ['RPriest']),
+            addPin("", "Northern Steppe Red Priest", 2540, 3095, 'Icons/PriestIcon.svg', 'red', 'red', '', ['RPriest']),
+            addPin("", "Santa Red Priest", 1225, 3815, 'Icons/PriestIcon.svg', 'red', 'red', '', ['RPriest']),
             
             
             
