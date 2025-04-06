@@ -22,16 +22,32 @@
             width: 100vw;
             height: 100vh;
         }
-
-        #toggle-overlay {
+        
+        #control-panel {
             position: absolute;
             top: 20px;
             right: 20px;
             z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            width: 180px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+        }
+        #control-panel button,
+        #control-panel input[type="text"] {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+
+        #toggle-overlay {
             background-color: rgba(0, 0, 0, 0.7);
             color: white;
-            font-size: 18px;
-            padding: 10px 15px;
+            font-size: 16px;
+            padding: 8px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -41,7 +57,6 @@
         }
         
         #filter-panel {
-            position: absolute;
             top: 100px;
             right: 20px;
             z-index: 1000;
@@ -59,19 +74,38 @@
         }
         
         #search-bar {
-            position: absolute;
-            top: 65px;
-            right: 20px;
-            z-index: 1000;
-            padding: 8px 12px;
+            padding: 8px;
             font-size: 14px;
             border-radius: 5px;
             border: none;
             outline: none;
-            width: 160px;
+            box-sizing: border-box;
         }
         
         
+        
+        
+        
+        .filter-category {
+            margin-bottom: 0px;
+        }
+        
+        .filter-title {
+            font-weight: bold;
+            margin-bottom: 1px;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 3px;
+            border-radius: 3px;
+        }
+
+        .filter-options {
+            margin-left: 10px;
+        }
+
+.filter-options.collapsed {
+    display: none;
+}
         
         .custom-marker {
             position: relative;
@@ -114,20 +148,32 @@
 
     <!-- Map Container -->
     <div id="map"></div>
-    
-    <button id="toggle-overlay">Priest Zones</button>
-    <input type="text" id="search-bar" placeholder="Search pins..." />
-    <!--These are the filter panels-->
-    <div id="filter-panel">       
-        <label><input type="checkbox" value="ART" checked> Artisans</label><br>
-        <label><input type="checkbox" value="Pillow" checked> Pillows</label><br>
-        <label><input type="checkbox" value="Tribe" checked> Tribe</label><br>
-        <label><input type="checkbox" value="GS" checked> Grimside</label><br>
-        <label><input type="checkbox" value="IF" checked> ImperiumFerro</label><br>
-        <label><input type="checkbox" value="POI" checked> POI</label><br>     
+    <div id="control-panel">
+        <button id="toggle-overlay">Priest Zones</button>
+        <input type="text" id="search-bar" placeholder="Search pins..." />
+        <!--These are the filter panels-->
+        <div id="filter-panel">
+            <div class="filter-category">
+                <div class="filter-title">Guilds</div>
+                <div class="filter-options">
+                    <label><input type="checkbox" value="ART"> Artisans</label>
+                    <label><input type="checkbox" value="Pillow"> Pillows</label>
+                    <label><input type="checkbox" value="Tribe"> Tribe</label>
+                    <label><input type="checkbox" value="GS"> Grimside</label>
+                    <label><input type="checkbox" value="IF"> ImperiumFerro</label>
+                </div>
+            </div>
+
+            <div class="filter-category">
+                <div class="filter-title">Content</div>
+                <div class="filter-options">
+                    <label><input type="checkbox" value="POI"> POIs</label>
+                    <label><input type="checkbox" value="Mounts"> Mounts</label>
+                    <!-- Add more here -->
+                </div>
+            </div>
+        </div>
     </div>
-    
-    
     
     
     <!-- Leaflet.js Library -->
@@ -250,7 +296,7 @@
                 }
             });
         }
-        let activeTags = new Set(['IF', 'ART', 'Pillow', 'Tribe', 'GS', 'POI']); // initially show all
+        let activeTags = new Set(); // initially show all
         
         
         // Function to add a pin with a scalable icon and visible name
@@ -387,19 +433,19 @@
             addPin("Smile SatorCamp", "", 2715, 720, 'Icons/SwordIcon.svg', 'red', 'red', '', ['POI']),
             
             //Horses - white
-            addPin("Jungle", "", 1530, 1140, 'Icons/HorseIcon.svg', 'white', 'white'),
-            addPin("Jungle", "", 2305, 570, 'Icons/HorseIcon.svg', 'white', 'white'),
-            addPin("Jungle", "", 1090, 820, 'Icons/HorseIcon.svg', 'white', 'white'),
-            addPin("Horse Field", "Jungle", 2815, 660, 'Icons/HorseIcon.svg', 'white', 'white'),
-            addPin("Jungle", "", 2110, 880, 'Icons/HorseIcon.svg', 'white', 'white'),
-            addPin("Mongrel", "", 2095, 1095, 'Icons/HorseIcon.svg', 'white', 'white'),
-            addPin("Jotun", "", 2435, 3640, 'Icons/HorseIcon.svg', 'white', 'white'),
+            addPin("Jungle", "", 1530, 1140, 'Icons/HorseIcon.svg', 'white', 'white', '', ['Mounts']),
+            addPin("Jungle", "", 2305, 570, 'Icons/HorseIcon.svg', 'white', 'white', '', ['Mounts']),
+            addPin("Jungle", "", 1090, 820, 'Icons/HorseIcon.svg', 'white', 'white', '', ['Mounts']),
+            addPin("Horse Field", "Jungle", 2815, 660, 'Icons/HorseIcon.svg', 'white', 'white', '', ['Mounts']),
+            addPin("Jungle", "", 2110, 880, 'Icons/HorseIcon.svg', 'white', 'white', '', ['Mounts']),
+            addPin("Mongrel", "", 2095, 1095, 'Icons/HorseIcon.svg', 'white', 'white', '', ['Mounts']),
+            addPin("Jotun", "", 2435, 3640, 'Icons/HorseIcon.svg', 'white', 'white', '', ['Mounts']),
             
             //Lykiators - white
-            addPin("Lykiator", "Stalker", 1660, 395, 'Icons/LykiatorIcon.svg', 'white', 'white'),
-            addPin("Lykiator", "Stalker", 1395, 565, 'Icons/LykiatorIcon.svg', 'white', 'white'),
-            addPin("Lykiator", "Marshland", 1795, 620, 'Icons/LykiatorIcon.svg', 'white', 'white'),
-            addPin("Lykiator", "Marshland", 1095, 420, 'Icons/LykiatorIcon.svg', 'white', 'white'),
+            addPin("Lykiator", "Stalker", 1660, 395, 'Icons/LykiatorIcon.svg', 'white', 'white', '', ['Mounts']),
+            addPin("Lykiator", "Stalker", 1395, 565, 'Icons/LykiatorIcon.svg', 'white', 'white', '', ['Mounts']),
+            addPin("Lykiator", "Marshland", 1795, 620, 'Icons/LykiatorIcon.svg', 'white', 'white', '', ['Mounts']),
+            addPin("Lykiator", "Marshland", 1095, 420, 'Icons/LykiatorIcon.svg', 'white', 'white', '', ['Mounts']),
             
             //Trolls - red
             addPin("TF Troll", "", 1650, 380, 'Icons/SkullIcon.svg', 'red', 'red'),
@@ -526,6 +572,13 @@
             updateMarkerVisibility();
         });
     }); 
+    
+    document.querySelectorAll('.filter-title').forEach(title => {
+        title.addEventListener('click', () => {
+            const options = title.nextElementSibling;
+            options.classList.toggle('collapsed');
+        });
+    });    
     
    document.getElementById('search-bar').addEventListener('input', () => {
         updateMarkerVisibility();
