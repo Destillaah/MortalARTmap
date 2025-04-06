@@ -42,7 +42,7 @@
         
         #filter-panel {
             position: absolute;
-            top: 70px;
+            top: 100px;
             right: 20px;
             z-index: 1000;
             background-color: rgba(0, 0, 0, 0.8);
@@ -58,7 +58,18 @@
             cursor: pointer;
         }
         
-        
+        #search-bar {
+            position: absolute;
+            top: 65px;
+            right: 20px;
+            z-index: 1000;
+            padding: 8px 12px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            width: 160px;
+        }
         
         
         
@@ -105,7 +116,7 @@
     <div id="map"></div>
     
     <button id="toggle-overlay">Priest Zones</button>
-    
+    <input type="text" id="search-bar" placeholder="Search pins..." />
     <!--These are the filter panels-->
     <div id="filter-panel">       
         <label><input type="checkbox" value="ART" checked> Artisans</label><br>
@@ -223,11 +234,15 @@
     }
 
          function updateMarkerVisibility() {
-            markers.forEach(({ marker, tags }) => {
+            const searchQuery = document.getElementById('search-bar').value.trim().toLowerCase(); 
+             
+            markers.forEach(({ marker, tags, name }) => {
                 const tagList = tags || []; // ← fallback to empty list
-                const isVisible = !tags || tags.length === 0 || tags.some(tag => activeTags.has(tag));
-                console.log(`[${name || 'Unnamed'}] visible?`, isVisible, '| Tags:', tagList);
-                if (isVisible) {
+                const tagMatch = !tags || tags.length === 0 || tags.some(tag => activeTags.has(tag));
+                const searchMatch = name.toLowerCase().includes(searchQuery);
+                const shouldShow = tagMatch && searchMatch;
+                console.log(`[${name || 'Unnamed'}] visible?`, shouldShow, '| Tags:', tagList);
+                if (shouldShow) {
                     marker.addTo(map);
                 } 
                 else {
@@ -511,6 +526,11 @@
             updateMarkerVisibility();
         });
     }); 
+    
+   document.getElementById('search-bar').addEventListener('input', () => {
+        updateMarkerVisibility();
+   });     
+        
         
     updateMarkerVisibility();  
     </script>
