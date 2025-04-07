@@ -90,6 +90,10 @@
             margin-bottom: 0px;
         }
         
+        .filter-subcategory {
+          margin-top: 5px;
+        }
+        
         .filter-title {
             font-weight: bold;
             margin-bottom: 1px;
@@ -98,14 +102,32 @@
             padding: 3px;
             border-radius: 3px;
         }
-
+        
+        .filter-subtitle {
+          font-weight: 600;
+          cursor: pointer;
+          margin-top: 0px;
+          background-color: rgba(255, 255, 255, 0.1);
+          padding: 2px;
+          border-radius: 3px;
+        }
+        
         .filter-options {
             margin-left: 10px;
         }
 
-.filter-options.collapsed {
-    display: none;
-}
+        .filter-options.collapsed {
+            display: none;
+        }
+        
+        .filter-options.nested label {
+            display:block;
+            margin-left: 10px;
+        }
+
+        .filter-options.nested.collapsed {
+          display: none;
+        }
         
         .custom-marker {
             position: relative;
@@ -163,6 +185,7 @@
                     <!-- Add more here -->
                 </div>
             </div>
+            
             <div class="filter-category">
                 <div class="filter-title">Guilds</div>
                 <div class="filter-options">
@@ -170,18 +193,31 @@
                     <label><input type="checkbox" value="Pillow"> Pillows</label>
                     <label><input type="checkbox" value="Tribe"> Tribe</label>
                     <label><input type="checkbox" value="GS"> Grimside</label>
-                    <label><input type="checkbox" value="IF"> ImperiumFerro</label>
+                    <label><input type="checkbox" value="IF"> ImperiumFerro</label>                    
                 </div>
             </div>
+           
             <div class="filter-category">
-                <div class="filter-title">Content</div>
+                <div class="filter-title">Areas</div>
                 <div class="filter-options">
-                    <label><input type="checkbox" value="POI"> POIs</label>
-                    <label><input type="checkbox" value="Mounts"> Mounts</label>
+                    <div class="filter-subcategory">
+                      <div class="filter-subtitle">Jungle</div>
+                      <div class="filter-options nested">
+                        <label><input type="checkbox" value="POI"> POIs</label>
+                        <label><input type="checkbox" value="Mounts"> Mounts</label>
+                        <label><input type="checkbox" value="Troll"> Troll</label>
+                        <label><input type="checkbox" value="JArea"> Area</label>  
+                      </div>
+                    </div>
+                    <div class="filter-subcategory">
+                      <div class="filter-subtitle">Mohki</div>
+                      <div class="filter-options nested">
+                        <label><input type="checkbox" value="soon"> soonTM</label>
+                      </div>
+                    </div>
                     <!-- Add more here -->
                 </div>
             </div>
-            
         </div>
     </div>
     
@@ -214,7 +250,7 @@
         map.fitBounds(bounds);
         
         // Function to create a custom scalable marker
-        function createCustomMarker(iconUrl, size, name, textColor, iconColor) {
+        function createCustomMarker(iconUrl, size, name, textColor, iconColor, highlight = '') {
             const iconDiv = document.createElement('div');
             iconDiv.className = 'marker-content';
 
@@ -275,7 +311,18 @@
             nameLabel.className = 'pin-name';
             nameLabel.innerHTML = name;
             nameLabel.style.color = textColor;
-
+            
+            if (highlight && name) {
+                const escaped = highlight.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                const regex = new RegExp(`(${escaped})`, 'i');
+                nameLabel.innerHTML = name.replace(regex, '<span style="background-color: black;">$1</span>');
+            }  
+            else {
+                nameLabel.innerText = name;
+            }
+            
+            
+            
             // Append the name below the icon
             iconDiv.appendChild(iconImg);
             iconDiv.appendChild(nameLabel);
@@ -291,14 +338,21 @@
 
          function updateMarkerVisibility() {
             const searchQuery = document.getElementById('search-bar').value.trim().toLowerCase(); 
-             
-            markers.forEach(({ marker, tags, name }) => {
+            //marker, tags, name 
+            markers.forEach(({marker, tags, name, iconUrl, baseSize, textColor, iconColor })  => {
+                
                 const tagList = tags || []; // ← fallback to empty list
                 const tagMatch = !tags || tags.length === 0 || tags.some(tag => activeTags.has(tag));
                 const searchMatch = name.toLowerCase().includes(searchQuery);
                 const shouldShow = tagMatch && searchMatch;
-                console.log(`[${name || 'Unnamed'}] visible?`, shouldShow, '| Tags:', tagList);
+                
                 if (shouldShow) {
+                    //marker.addTo(map);
+                    const zoom = map.getZoom();
+                    const scaleFactor = Math.pow((zoom + 1) / 10, 1);
+                    const size = baseSize * scaleFactor;
+
+                    marker.setIcon(createCustomMarker(iconUrl, size, name, textColor, iconColor, searchQuery));
                     marker.addTo(map);
                 } 
                 else {
@@ -380,30 +434,30 @@
             addPin("BadCo Keep", "", 1985, 1900, 'Icons/KeepIcon.svg', 'white', 'white', '', ['Keeps']),
             addPin("xESx", "", 935, 1395, 'Icons/KeepIcon.svg', 'white', 'white', '', ['Keeps']),
             
-            //Call outs - white torch
-            addPin("Kush", "Priest, Bank, Stables", 2610, 580, 'Icons/VillageIcon.svg', 'white', 'white'),   
-            addPin("Turtle Beach", "", 1330, 150, 'Icons/TorchIcon.svg', 'white', 'white'),
-            addPin("Turtle Beach", "", 1060, 190, 'Icons/TorchIcon.svg', 'white', 'white'),
-            addPin("Waterfall", "", 2720, 575, 'Icons/TorchIcon.svg', 'white', 'white'),
-            addPin("Dry River", "", 2730, 620, 'Icons/TorchIcon.svg', 'white', 'white'),
-            addPin("Top Ramp", "", 2835, 600, 'Icons/TorchIcon.svg', 'white', 'white'),
+            //Area Names - white torch
+            addPin("Kush", "Priest, Bank, Stables", 2610, 580, 'Icons/VillageIcon.svg', 'white', 'white', '', ['JArea']),   
+            addPin("Turtle Beach", "", 1330, 150, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
+            addPin("Turtle Beach", "", 1060, 190, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
+            addPin("Waterfall", "", 2720, 575, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
+            addPin("Dry River", "", 2730, 620, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
+            addPin("Top Ramp", "", 2835, 600, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
             addPin("Spider Valley", "", 1390, 1440, 'Icons/TorchIcon.svg', 'white', 'white'),
-            addPin("Sausage Lake", "", 1985, 2050, 'Icons/TorchIcon.svg', 'white', 'white'),
-            addPin("Bridge", "", 1600, 1000, 'Icons/TorchIcon.svg', 'white', 'white'),
-            addPin("Cursed Pass", "", 1990, 880, 'Icons/TorchIcon.svg', 'white', 'white'),
-            addPin("Three_Lakes / Glimmer_lakes", "", 1650, 600, 'Icons/TorchIcon.svg', 'white', 'white'),
-            addPin("Assassins Pass", "", 1970, 690, 'Icons/TorchIcon.svg', 'white', 'white'),
-            addPin("Canterri", "", 1150, 750, 'Icons/TorchIcon.svg', 'white', 'white'),
-            addPin("Eden Island", "", 2000, 280, 'Icons/TorchIcon.svg', 'white', 'white'),
-            addPin("Mana Island", "", 2300, 320, 'Icons/TorchIcon.svg', 'white', 'white'),
-            addPin("Mana Crack", "", 2300, 420, 'Icons/TorchIcon.svg', 'white', 'white'),
-            addPin("Calx Falls", "", 2055, 490, 'Icons/TorchIcon.svg', 'white', 'white'),
-            addPin("Kelp Lake", "", 1220, 870, 'Icons/TorchIcon.svg', 'white', 'white'),
-            addPin("The Spine", "", 2400, 1020, 'Icons/TorchIcon.svg', 'white', 'white'),
-            addPin("Turtle Pond", "", 2835, 360, 'Icons/TorchIcon.svg', 'white', 'white'),
-            addPin("Sam's River", "", 1295, 645, 'Icons/TorchIcon.svg', 'white', 'white'),
-            addPin("Horse Field Tower", "", 1470, 1050, 'Icons/TorchIcon.svg', 'white', 'white'),
-            addPin("Bakti River", "", 1805, 1175, 'Icons/TorchIcon.svg', 'white', 'white'),
+            addPin("Sausage Lake", "", 1985, 2050, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
+            addPin("Bridge", "", 1600, 1000, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
+            addPin("Cursed Pass", "", 1990, 880, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
+            addPin("Three_Lakes / Glimmer_lakes", "", 1650, 600, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
+            addPin("Assassins Pass", "", 1970, 690, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
+            addPin("Canterri", "", 1150, 750, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
+            addPin("Eden Island", "", 2000, 280, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
+            addPin("Mana Island", "", 2300, 320, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
+            addPin("Mana Crack", "", 2300, 420, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
+            addPin("Calx Falls", "", 2055, 490, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
+            addPin("Kelp Lake", "", 1220, 870, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
+            addPin("The Spine", "", 2400, 1020, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
+            addPin("Turtle Pond", "", 2835, 360, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
+            addPin("Sam's River", "", 1295, 645, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
+            addPin("Horse Field Tower", "", 1470, 1050, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
+            addPin("Bakti River", "", 1805, 1175, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
             
             //NPC - purple
             addPin("Bakti", "", 1990, 1210, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
@@ -415,8 +469,7 @@
             addPin("Hyllspeia", "", 1320, 3580, 'Icons/VillageIcon.svg', 'blue', 'purple', '', ['NPC']),
             addPin("Morin Khur", "", 3280, 2623, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
             addPin("Toxai", "", 3645, 2500, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
-            addPin("Cave Camp", "", 2460, 3330, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
-            
+            addPin("Cave Camp", "", 2460, 3330, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),   
             addPin("Jungle Camp", "", 2800, 550, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
             addPin("Kranesh", "", 1550, 2960, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
             
@@ -458,9 +511,9 @@
             addPin("Lykiator", "Marshland", 1095, 420, 'Icons/LykiatorIcon.svg', 'white', 'white', '', ['Mounts']),
             
             //Trolls - red
-            addPin("TF Troll", "", 1650, 380, 'Icons/SkullIcon.svg', 'red', 'red'),
-            addPin("RUIN Troll", "", 1040, 850, 'Icons/SkullIcon.svg', 'red', 'red'),
-            addPin("JSH Troll", "", 2285, 610, 'Icons/SkullIcon.svg', 'red', 'red'),
+            addPin("TF Troll", "", 1650, 380, 'Icons/SkullIcon.svg', 'red', 'red', '', ['Troll']),
+            addPin("RUIN Troll", "", 1040, 850, 'Icons/SkullIcon.svg', 'red', 'red', '', ['Troll']),
+            addPin("JSH Troll", "", 2285, 610, 'Icons/SkullIcon.svg', 'red', 'red', '', ['Troll']),
             
             // Pillows - pink
             addPin("Sator Beach", "PILLOWS Bank, Priest, Stable", 2040, 380, 'Icons/VillageIcon.svg', 'white', 'pink', '', ['Pillow']),
@@ -468,7 +521,7 @@
             addPin("Venom SH", "", 2960, 560, 'Icons/SHIcon.svg', 'white', 'pink', '', ['Pillow']),
             
             //Grimside - blue
-            addPin("Grimside Village", "Bank, Priest", 2340, 610, 'Icons/VillageIcon.svg', 'white', 'blue', '', ['GS']),
+            addPin("Bnyn Village", "Grimside Bank, Priest", 2340, 610, 'Icons/VillageIcon.svg', 'white', 'blue', '', ['GS']),
             addPin("Grimside Canterri Village", "", 1260, 700, 'Icons/VillageIcon.svg', 'blue', 'blue', '', ['GS']),
             
             //Tribe - lime green
@@ -513,15 +566,12 @@
             addPin("LakePikes", "Priest, Bank, Stable", 3450, 490, 'Icons/VillageIcon.svg', 'white', 'white'),
             addPin("Some Randomness", "", 1265, 110, 'Icons/SHIcon.svg', 'red', 'red'),
             addPin("KM village", "", 2610, 480, 'Icons/VillageIcon.svg', 'red', 'red'),   
-            addPin("Got Merc'd", "", 2320, 520, 'Icons/SkullIcon.svg', 'red', 'red'),
             addPin("Titty Tower", "", 1715, 1100, 'Icons/SHIcon.svg', 'white', 'white'),
             addPin("Old Slav", "Old Coalition Village", 2650, 630, 'Icons/VillageIcon.svg', 'red', 'red'),
             addPin("Old Purg", "Old Purgatory/UBG Village", 2650, 670, 'Icons/VillageIcon.svg', 'white', 'white'),
             addPin("Wolf", "", 1460, 890, 'Icons/SHIcon.svg', 'white', 'white'),
             addPin("DirtyDozen", "", 1480, 575, 'Icons/VillageIcon.svg', 'white', 'white'),
-            addPin("Got Clowned", "", 2770, 560, 'Icons/SkullIcon.svg', 'red', 'red'),
-          
-            
+  
             //Red Priests
             addPin("", "Turtle beach Red Priest", 1100, 260, 'Icons/PriestIcon.svg', 'red', 'red', '', ['RPriest']),
             addPin("", "SV Red Priest", 1355, 1160, 'Icons/PriestIcon.svg', 'red', 'red', '', ['RPriest']),
@@ -569,19 +619,21 @@
     overlayVisible = !overlayVisible;
     });    
     
-         
-    document.querySelectorAll('#filter-panel input[type=checkbox]').forEach(checkbox => {
-        checkbox.addEventListener('change', () => {
-            const tag = checkbox.value;
-            if (checkbox.checked) {
-                activeTags.add(tag);
-            } 
-            else {
-                activeTags.delete(tag);
-            }
-            updateMarkerVisibility();
-        });
-    }); 
+         function bindFilterCheckboxes(){
+            const allCheckboxes = document.querySelectorAll('#filter-panel input[type="checkbox"]');
+            allCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', () => {
+                    const tag = checkbox.value;
+                    if (checkbox.checked) {
+                        activeTags.add(tag);
+                    } else {
+                        activeTags.delete(tag);
+                    }
+                    updateMarkerVisibility();
+                });
+            });
+        }
+   
     
     document.querySelectorAll('.filter-title').forEach(title => {
         title.addEventListener('click', () => {
@@ -589,12 +641,20 @@
             options.classList.toggle('collapsed');
         });
     });    
+        
+    document.querySelectorAll('.filter-subtitle').forEach(sub => {
+      sub.addEventListener('click', () => {
+        const options = sub.nextElementSibling;
+        options.classList.toggle('collapsed');
+      });
+    });        
     
    document.getElementById('search-bar').addEventListener('input', () => {
         updateMarkerVisibility();
-   });     
+   }); 
         
-        
+         
+    bindFilterCheckboxes();    
     updateMarkerVisibility();  
     </script>
   
