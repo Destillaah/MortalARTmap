@@ -193,7 +193,8 @@
                     <label><input type="checkbox" value="Pillow"> Pillows</label>
                     <label><input type="checkbox" value="Tribe"> Tribe</label>
                     <label><input type="checkbox" value="GS"> Grimside</label>
-                    <label><input type="checkbox" value="IF"> ImperiumFerro</label>                    
+                    <label><input type="checkbox" value="IF"> ImperiumFerro</label>
+                    <label><input type="checkbox" value="ONYX"> Onyx</label>  
                 </div>
             </div>
            
@@ -228,7 +229,7 @@
     <script>
         // Initialize the map
         const map = L.map('map', {
-            //minZoom: -1,
+            minZoom: -1,
             maxZoom: 3, 
             center: [0, 0],
             crs: L.CRS.Simple
@@ -393,7 +394,11 @@
 
             //Artisan Markers
             addPin("Goat Pass", "GoatPass", 1560, 745, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART'] ),
+            addPin("ValleyHo", "Priest", 1485, 670, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART'] ),
+            addPin("GoatsLanding", "", 1560, 700, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART'] ),
+            addPin("Vancouver", "", 1650, 725, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART'] ),
             addPin("Low Road", "Bank, Priest, Stable", 1520, 820, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART']),
+            addPin("Kremlin", "", 1560, 825, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART']),
             addPin("High Road", "Bank, Priest, Stable", 1600, 880, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART']),
             addPin("Back Road", "Bank, Priest, Stable", 1600, 830, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART']),
             addPin("Sam's Pond", "Bank, Priest, MagicEmp", 1080, 590, 'Icons/VillageIcon.svg', 'white', 'white', '', ['ART']),
@@ -422,6 +427,8 @@
             addPin("House of Wang", "", 1735, 1175, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
             addPin("Panthoff", "MagicEmp", 2785, 585, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
             addPin("BonkerBeach", "", 2560, 330, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
+            addPin("Titty Tower", "", 1715, 1100, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART']),
+            addPin("Mainroad", "", 1490, 760, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART']),
             
             //Keeps
             addPin("Artisan Keep", "WTB Granum", 1470, 750, 'Icons/KeepIcon.svg', 'white', 'white', '', ['Keeps']),
@@ -433,7 +440,7 @@
             addPin("OdinSeed2", "", 2200, 2720, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
             addPin("Empire", "", 3080, 2210, 'Icons/KeepIcon.svg', 'white', 'white', '', ['Keeps']),
             addPin("BadCo Keep", "", 1985, 1900, 'Icons/KeepIcon.svg', 'white', 'white', '', ['Keeps']),
-            addPin("xESx", "", 935, 1395, 'Icons/KeepIcon.svg', 'white', 'white', '', ['Keeps']),
+            addPin("RUIN", "", 935, 1395, 'Icons/KeepIcon.svg', 'white', 'white', '', ['Keeps']),
             
             //Area Names - white torch
             addPin("Kush", "Priest, Bank, Stables", 2610, 580, 'Icons/VillageIcon.svg', 'white', 'white', '', ['JArea']),   
@@ -518,12 +525,12 @@
             
             // Pillows - pink
             addPin("Sator Beach", "PILLOWS Bank, Priest, Stable", 2040, 380, 'Icons/VillageIcon.svg', 'white', 'pink', '', ['Pillow']),
-            addPin("Pachinki", "", 1025, 695, 'Icons/SHIcon.svg', 'white', 'pink', '', ['Pillow']),
+            addPin("Pochinki", "", 1025, 695, 'Icons/SHIcon.svg', 'white', 'pink', '', ['Pillow']),
             addPin("Venom SH", "", 2960, 560, 'Icons/SHIcon.svg', 'white', 'pink', '', ['Pillow']),
             
             //Grimside - blue
             addPin("Bnyn Village", "Grimside Bank, Priest", 2340, 610, 'Icons/VillageIcon.svg', 'white', 'blue', '', ['GS']),
-            addPin("Grimside Canterri Village", "", 1260, 700, 'Icons/VillageIcon.svg', 'blue', 'blue', '', ['GS']),
+            addPin("Grimside Canterri Village", "", 1260, 700, 'Icons/VillageIcon.svg', 'white', 'blue', '', ['GS']),
             
             //Tribe - lime green
             addPin("Panther Village", "", 2785, 570, 'Icons/VillageIcon.svg', 'white', 'lime', '', ['Tribe']),
@@ -536,6 +543,9 @@
             addPin("Jaguar", "", 2930, 575, 'Icons/SHIcon.svg', 'white', 'lime', '', ['Tribe']),
             addPin("FortBoyard", "", 2905, 620, 'Icons/SHIcon.svg', 'white', 'lime', '', ['Tribe']),
             addPin("Old Tribe", "Bank, Priest, Stable", 2865, 530, 'Icons/VillageIcon.svg', 'white', 'lime', '', ['Tribe']),
+            
+            //Onyx - Blue
+             addPin("Canterri Paradise", "Bank, Priest, MagicEmp", 1065, 580, 'Icons/HouseIcon.svg', 'white', 'blue', '', ['ONYX']),
             
             //OS Alliance
             addPin("SaltPact", "", 1650, 3150, 'Icons/VillageIcon.svg', 'cyan', 'cyan'),
@@ -567,7 +577,6 @@
             addPin("LakePikes", "Priest, Bank, Stable", 3450, 490, 'Icons/VillageIcon.svg', 'white', 'white'),
             addPin("Some Randomness", "", 1265, 110, 'Icons/SHIcon.svg', 'red', 'red'),
             addPin("KM village", "", 2610, 480, 'Icons/VillageIcon.svg', 'red', 'red'),   
-            addPin("Titty Tower", "", 1715, 1100, 'Icons/SHIcon.svg', 'white', 'white'),
             addPin("Old Slav", "Old Coalition Village", 2650, 630, 'Icons/VillageIcon.svg', 'red', 'red'),
             addPin("Old Purg", "Old Purgatory/UBG Village", 2650, 670, 'Icons/VillageIcon.svg', 'white', 'white'),
             addPin("Wolf", "", 1460, 890, 'Icons/SHIcon.svg', 'white', 'white'),
