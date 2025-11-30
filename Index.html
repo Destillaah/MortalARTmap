@@ -182,6 +182,8 @@
                     <label><input type="checkbox" value="RPriest" checked> Red Priest</label>
                     <label><input type="checkbox" value="Dung" checked> Dungeons</label>
                     <label><input type="checkbox" value="Keeps" checked> Keeps</label>
+                    <label><input type="checkbox" value="WayShrines"> WayShrines</label>
+                    <label><input type="checkbox" value="Outposts"> Outposts</label>
                     <!-- Add more here -->
                 </div>
             </div>
@@ -206,8 +208,14 @@
                       <div class="filter-subtitle">Jungle</div>
                       <div class="filter-options nested">
                         <label><input type="checkbox" value="POI"> POIs</label>
-                        <label><input type="checkbox" value="Mounts"> Mounts</label>
+                        <label><input type="checkbox" value="Horse"> Horse</label>
                         <label><input type="checkbox" value="Troll"> Troll</label>
+                        <label><input type="checkbox" value="Lyk"> Lykiator</label>
+                        <label><input type="checkbox" value="Sator"> Sator</label>
+                        <label><input type="checkbox" value="TBird"> TerrorBird</label>
+                        <label><input type="checkbox" value="Campo"> Campodon</label>
+                        <label><input type="checkbox" value="Turtle"> Turtle</label>
+                        <label><input type="checkbox" value="Crab"> Crab</label>  
                         <label><input type="checkbox" value="JArea"> Area</label>  
                       </div>
                     </div>
@@ -433,6 +441,11 @@
             addPin("Bonker Bird", "Priest, Stable, Culinarium", 1810, 765, '', 'white', 'white', '', ['ART']),             
             addPin("Wings For Schling", "", 1840, 690, '', 'white', 'white', '', ['ART']),
             
+            //Wayshrines
+            addPin("Wayshrine Test", "", 2030, 1800, 'Icons/DungeonIcon.svg', 'white', 'white', '', ['WayShrines']),
+            //Outposts
+            addPin("Outpost Test", "", 2045, 1800, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            
             //Keeps
             addPin("Artisan Keep", "WTB Granum", 1470, 750, 'Icons/KeepIcon.svg', 'white', 'white', '', ['Keeps']),
             addPin("Legio Keep", "King Petbroker's domain", 570, 530, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
@@ -506,20 +519,31 @@
             addPin("RuinsBandits", "", 2815, 720, 'Icons/SwordIcon.svg', 'red', 'red', '', ['POI']),
             addPin("Smile SatorCamp", "", 2715, 720, 'Icons/SwordIcon.svg', 'red', 'red', '', ['POI']),
             
+            //Sators
+            addPin("Sator", "", 2020, 1800, 'Icons/SatorIcon.svg', 'white', 'white', '', ['Sator']),
+            //TerrorBirds
+            addPin("TBird", "", 1985, 1800, 'Icons/TbirdIcon.svg', 'white', 'white', '', ['TBird']),
+            //Campodons
+            addPin("Campo", "", 1970, 1800, 'Icons/CampoIcon.svg', 'white', 'white', '', ['Campo']),
+            //Turtles
+            addPin("Turtle", "", 1955, 1800, 'Icons/TurtleIcon.svg', 'white', 'white', '', ['Turtle']),
+            //Crabs
+            addPin("Crab", "", 2000, 1800, 'Icons/CrabIcon.svg', 'white', 'white', '', ['Crab']),
+            
             //Horses - white
-            addPin("Jungle", "", 1530, 1140, 'Icons/HorseIcon.svg', 'white', 'white', '', ['Mounts']),
-            addPin("Jungle", "", 2305, 570, 'Icons/HorseIcon.svg', 'white', 'white', '', ['Mounts']),
-            addPin("Jungle", "", 1090, 820, 'Icons/HorseIcon.svg', 'white', 'white', '', ['Mounts']),
-            addPin("Horse Field", "Jungle", 2815, 660, 'Icons/HorseIcon.svg', 'white', 'white', '', ['Mounts']),
-            addPin("Jungle", "", 2110, 880, 'Icons/HorseIcon.svg', 'white', 'white', '', ['Mounts']),
-            addPin("Mongrel", "", 2095, 1095, 'Icons/HorseIcon.svg', 'white', 'white', '', ['Mounts']),
-            addPin("Jotun", "", 2435, 3640, 'Icons/HorseIcon.svg', 'white', 'white', '', ['Mounts']),
+            addPin("Jungle", "", 1530, 1140, 'Icons/HorseIcon.svg', 'white', 'white', '', ['Horse']),
+            addPin("Jungle", "", 2305, 570, 'Icons/HorseIcon.svg', 'white', 'white', '', ['Horse']),
+            addPin("Jungle", "", 1090, 820, 'Icons/HorseIcon.svg', 'white', 'white', '', ['Horse']),
+            addPin("Horse Field", "Jungle", 2815, 660, 'Icons/HorseIcon.svg', 'white', 'white', '', ['Horse']),
+            addPin("Jungle", "", 2110, 880, 'Icons/HorseIcon.svg', 'white', 'white', '', ['Horse']),
+            addPin("Mongrel", "", 2095, 1095, 'Icons/HorseIcon.svg', 'white', 'white', '', ['Horse']),
+            addPin("Jotun", "", 2435, 3640, 'Icons/HorseIcon.svg', 'white', 'white', '', ['Horse']),
             
             //Lykiators - white
-            addPin("Lykiator", "Stalker", 1660, 395, 'Icons/LykiatorIcon.svg', 'white', 'white', '', ['Mounts']),
-            addPin("Lykiator", "Stalker", 1395, 565, 'Icons/LykiatorIcon.svg', 'white', 'white', '', ['Mounts']),
-            addPin("Lykiator", "Marshland", 1795, 620, 'Icons/LykiatorIcon.svg', 'white', 'white', '', ['Mounts']),
-            addPin("Lykiator", "Marshland", 1095, 420, 'Icons/LykiatorIcon.svg', 'white', 'white', '', ['Mounts']),
+            addPin("Lykiator", "Stalker", 1660, 395, 'Icons/LykiatorIcon.svg', 'white', 'white', '', ['Lyk']),
+            addPin("Lykiator", "Stalker", 1395, 565, 'Icons/LykiatorIcon.svg', 'white', 'white', '', ['Lyk']),
+            addPin("Lykiator", "Marshland", 1795, 620, 'Icons/LykiatorIcon.svg', 'white', 'white', '', ['Lyk']),
+            addPin("Lykiator", "Marshland", 1095, 420, 'Icons/LykiatorIcon.svg', 'white', 'white', '', ['Lyk']),
             
             //Trolls - red
             addPin("TF Troll", "", 1650, 380, 'Icons/SkullIcon.svg', 'red', 'red', '', ['Troll']),
