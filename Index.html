@@ -179,8 +179,8 @@
                 <div class="filter-title">Common</div>
                 <div class="filter-options">
                     <label><input type="checkbox" value="NPC" checked> Towns</label>
-                    <label><input type="checkbox" value="RPriest" checked> Red Priest</label>
-                    <label><input type="checkbox" value="Dung" checked> Dungeons</label>
+                    <label><input type="checkbox" value="RPriest"> Red Priest</label>
+                    <label><input type="checkbox" value="Dung"> Dungeons</label>
                     <label><input type="checkbox" value="Keeps" checked> Keeps</label>
                     <label><input type="checkbox" value="WayShrines"> WayShrines</label>
                     <label><input type="checkbox" value="Outposts"> Outposts</label>
@@ -191,13 +191,13 @@
             <div class="filter-category">
                 <div class="filter-title">Guilds</div>
                 <div class="filter-options">
-                    <label><input type="checkbox" value="ART"> Artisans</label>
+                    <label><input type="checkbox" value="ARTS" checked> Artisans - Strongholds</label>
+                    <label><input type="checkbox" value="ART"> Artisan - Houses</label>
                     <label><input type="checkbox" value="Pillow"> Pillows</label>
                     <label><input type="checkbox" value="Tribe"> Tribe</label>
                     <label><input type="checkbox" value="GS"> Grimside</label>
-                    <label><input type="checkbox" value="IF"> ImperiumFerro</label>
-                    <label><input type="checkbox" value="ONYX"> Onyx</label>
-                    <label><input type="checkbox" value="BLUE"> Other (Blue)</label>                    
+                    <label><input type="checkbox" value="ALL"> Alliance</label>
+                    <label><input type="checkbox" value="OTHER"> Other</label>                    
                 </div>
             </div>
            
@@ -216,7 +216,7 @@
                         <label><input type="checkbox" value="Campo"> Campodon</label>
                         <label><input type="checkbox" value="Turtle"> Turtle</label>
                         <label><input type="checkbox" value="Crab"> Crab</label>  
-                        <label><input type="checkbox" value="JArea"> Area</label>  
+                        <label><input type="checkbox" value="JArea"> Area / Waypoints</label>  
                       </div>
                     </div>
                     <div class="filter-subcategory">
@@ -370,7 +370,7 @@
                 }
             });
         }
-        let activeTags = new Set(['NPC', 'RPriest', 'Dung', 'Keeps']); // initially show all
+        let activeTags = new Set(['NPC', 'Towns', 'ARTS']); // initially show all
         
         
         // Function to add a pin with a scalable icon and visible name
@@ -401,62 +401,166 @@
         // List of markers
         const markers = [
 
-            //Artisan Markers
-            addPin("Goat Pass", "GoatPass", 1560, 745, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART'] ),
-            addPin("ValleyHo", "Priest", 1485, 670, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART'] ),
-            addPin("GoatsLanding", "", 1560, 700, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART'] ),
-            addPin("Vancouver", "", 1650, 725, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART'] ),
-            addPin("Low Road", "Bank, Priest, Stable", 1520, 820, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART']),
-            addPin("Kremlin", "", 1560, 825, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART']),
-            addPin("High Road", "Bank, Priest, Stable", 1600, 880, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART']),
-            addPin("Back Road", "Bank, Priest, Stable", 1600, 830, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART']),
-            addPin("Sam's Pond", "Bank, Priest, MagicEmp", 1080, 590, 'Icons/VillageIcon.svg', 'white', 'white', '', ['ART']),
+            //Artisan Strongholds 
+            addPin("Low Road", "Bank, Priest, Stable", 1520, 820, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),
+            addPin("High Road", "Bank, Priest, Stable", 1600, 880, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),
+            addPin("Back Road", "Bank, Priest, Stable", 1600, 830, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),
+            addPin("Main Road", "", 1490, 760, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),           
+            addPin("Goat Pass", "GoatPass", 1560, 745, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS'] ),
+            addPin("New Baguette", "Priest, Bank", 1525, 690, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS'] ),
+            addPin("ValleyHo", "Priest", 1485, 680, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS'] ),
+            addPin("Rampart", "Priest, Stable", 1545, 635, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS'] ),           
+            addPin("GoatsLanding", "", 1560, 700, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS'] ),
+            addPin("YCO", "Bank, Priest, Stable, T3 Gen Store, MagicEmp, Apothecary", 1770, 780, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),             
+            addPin("Wings For Schling", "", 1840, 690, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),
+            addPin("Vancouver", "", 1640, 725, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS'] ),
+            addPin("SamsSamsRibsNWhores", "Bank, Priest, MagicEmp", 1080, 620, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),
+            addPin("Isengard", "MagicEmp", 1295, 680, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),
+            addPin("JSH", "Elvans Atelier: Bank, Priest, MagicEmp", 2300, 550, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),
+            addPin("KillEverySator", "", 2370, 540, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),
+            addPin("Turkey Farm", "Bank, Priest, Culinarium", 1500, 440, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),
+            addPin("Great Cornholio", "Magic Emp", 1505, 400, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),
+            addPin("Lacertilia", "Culinarium", 2000, 380, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),
+            addPin("KLM", "", 1995, 1095, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),
+            addPin("VillaLightHall", "Priest, Bank, Stable, T1 General Store, T3 MagicEmp, T3 Culli", 1685, 1570, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),   
+            addPin("Justice", "Priest, Bank, Stable", 2445, 3600, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),
+            addPin("Titty Tower", "", 1715, 1100, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),
+            addPin("NorthernShores", "Priest, Bank, Stable, Emporium", 1915, 595, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),
+            addPin("GoneFishing", "", 1885, 575, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),            
+            addPin("MudButte", "", 1710, 470, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),             
+            addPin("CajunBacon", "", 1910, 810, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']), 
+            addPin("North GlimLake", "", 1690, 740, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),            
+            addPin("KillaTheRotten", "", 1690, 500, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),  
+            addPin("Stronghold", "", 1440, 375, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),  
+            
+            addPin("Harpos", "", 1110, 700, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),            
+            addPin("Assassins Pass", "", 1940, 700, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),            
+            
+            
+            //Artisan Houses
+            addPin("Pittsburg", "", 1905, 600, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),   
+            addPin("Housetankerous", "", 1930, 610, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),               
+            addPin("Bunny Ranch", "", 1900, 780, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']), 
+            addPin("HopsHaven", "", 1915, 785, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),             
+            addPin("Bonker Bird", "Priest, Stable, Culinarium", 1815, 760, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),             
+            addPin("MineYourHeartOut", "", 1790, 660, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
+            addPin("DragonHut", "", 1800, 670, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
+            addPin("WayShrine", "", 1710, 670, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
+            addPin("GlimmerPlume", "", 1680, 600, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),            
+            addPin("BonkerBirdTwo", "", 1685, 595, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),             
+            addPin("NotMushroomHere", "", 1700, 595, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),      
+            addPin("Booyakasha", "", 1775, 550, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),  
+            addPin("GranumWhat", "", 1925, 460, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),            
+            addPin("RangerOutpost", "", 1775, 490, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),  
+            addPin("MudWard", "", 1715, 465, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
+            addPin("RotHeavy", "", 1665, 520, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']), 
+            addPin("Glitorius", "", 1655, 515, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),           
+            addPin("RumbleInDJungle", "", 1623, 485, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
+            addPin("RotWaffle", "", 1615, 495, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
+            addPin("Rot", "", 1635, 486, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
+            addPin("TheRotten", "", 1630, 498, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
+            addPin("KnightRot", "", 1625, 480, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
+            addPin("ScourgeRot", "", 1643, 491, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
+            addPin("House", "", 1643, 503, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
+            addPin("RotFarmers", "", 1648, 498, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),            
+            addPin("RotDaddy", "", 1648, 508, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),            
+            addPin("RotTracker", "", 1653, 498, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),            
+            addPin("WillowSanctuary", "", 1648, 488, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),            
+            addPin("RotTavern", "", 1648, 483, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),            
+            addPin("StyggysWigHut", "", 1560, 435, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
+            addPin("Gains Villa", "", 1500, 450, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
+            addPin("Asylum", "", 1490, 430, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
+            addPin("KillItWithFire", "", 1670, 325, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
+            addPin("Hermitage", "", 1680, 328, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
+            addPin("House", "", 1620, 330, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
+            addPin("Ghost", "", 1455, 165, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
+            addPin("NaturistBeachHoe", "", 1455, 95, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),            
+            addPin("NoMoreReaction", "Bank, Culinarium, Stable", 1430, 530, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),            
+            addPin("ToSpitIsSalvation", "Priest", 1510, 595, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),               
+            addPin("Kremlin", "", 1560, 825, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART']),  
             addPin("Veinhold", "", 1115, 695, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART']),
             addPin("AcademiaMagicae", "", 1200, 810, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART']),
-            addPin("Isengard", "MagicEmp", 1295, 680, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART']),
             addPin("SHA", "MagicEmp", 1385, 675, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
-            addPin("JSH", "Elvans Atelier: Bank, Priest, MagicEmp", 2300, 550, 'Icons/VillageIcon.svg', 'white', 'white', '', ['ART']),
             addPin("BonkerHill", "", 2290, 545, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
-            addPin("Kill All Sators", "", 2370, 540, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART']),
-            addPin("Turkey Farm", "Bank, Priest", 1500, 450, 'Icons/VillageIcon.svg', 'white', 'white', '', ['ART']),
-            addPin("Great Cornholio", "Magic Emp", 1505, 400, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART']),
-            addPin("The Rot", "Bank, Priest, Stable", 1650, 480, 'Icons/VillageIcon.svg', 'white', 'white', '', ['ART']),
-            addPin("Lacertilia", "Culinarium", 2000, 380, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART']),
             addPin("Fish light", "", 1890, 310, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART']),
-            addPin("Secret Lake", "Priest, Bank, Stable, Emporium", 1920, 565, 'Icons/VillageIcon.svg', 'white', 'white', '', ['ART']),
-            addPin("Halfway house", "", 1940, 700, '', 'white', 'white', '', ['ART']),
-            addPin("Bunny Ranch", "", 1900, 780, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']), 
-            addPin("YCO", "Bank, Priest, Stable, T3 Gen Store, MagicEmp, Apothecary", 1770, 780, 'Icons/VillageIcon.svg', 'white', 'white', '', ['ART']), 
-            addPin("KLM", "", 1995, 1095, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART']),
-            addPin("Villa", "Priest, Bank, Stable, T1 General Store, T3 MagicEmp, T3 Culli", 1685, 1570, 'Icons/VillageIcon.svg', 'white', 'white', '', ['ART']),
+
             addPin("Minophilia", "", 1900, 3460, 'Icons/HouseIcon.svg', 'blue', 'blue', '', ['ART']),
-            addPin("Justice", "Priest, Bank, Stable", 2445, 3600, 'Icons/VillageIcon.svg', 'white', 'white', '', ['ART']),
             addPin("GranumTerrace", "", 1535, 1230, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
             addPin("POIJuicers", "", 1510, 580, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
             addPin("House of Wang", "", 1735, 1175, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
             addPin("Panthoff", "MagicEmp", 2785, 585, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
             addPin("BonkerBeach", "", 2560, 330, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
-            addPin("Titty Tower", "", 1715, 1100, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART']),
-            addPin("Mainroad", "", 1490, 760, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART']),
-            addPin("Bonker Bird", "Priest, Stable, Culinarium", 1810, 765, '', 'white', 'white', '', ['ART']),             
-            addPin("Wings For Schling", "", 1840, 690, '', 'white', 'white', '', ['ART']),
             
+        
             //Wayshrines
-            addPin("Wayshrine Test", "", 2030, 1800, 'Icons/DungeonIcon.svg', 'white', 'white', '', ['WayShrines']),
+            addPin("Wayshrine Canteri", "Eastern side of Glimmer Cap Lakes", 1695, 645, 'Icons/DungeonIcon.svg', 'white', 'white', '', ['WayShrines']),
+            addPin("Wayshrine Jungle Camp", "From Jungle Camp, go east then south down the ramp, continue south about 500m. Big rock mountain on left, keep it on your left, go towards the south of it and up a ramp on your left to the top. Panthers between Jungle Camp and WayShrine, you will not make it naked on foot.", 2830, 475, 'Icons/DungeonIcon.svg', 'white', 'white', '', ['WayShrines']),
+            addPin("Wayshrine Meduli", "WayShrine approx 500m south of town on hill, Place called Donut.", 345, 2050, 'Icons/DungeonIcon.svg', 'white', 'white', '', ['WayShrines']),
+            addPin("Wayshrine Tindrem", "WayShrine approx 300m south east of town, on hill.", 570, 3090, 'Icons/DungeonIcon.svg', 'white', 'white', '', ['WayShrines']),
+            addPin("Wayshrine Vadda", "WayShrine go about 200m south up to the graveyard, at the front of the graveyard, turn left due east, and go up the hill.", 1695, 1785, 'Icons/DungeonIcon.svg', 'white', 'white', '', ['WayShrines']),
+            addPin("Wayshrine Bakti", "WayShrine approx100m south of graveyeard (SE of town), where old red priest used to be.", 2010, 1165, 'Icons/DungeonIcon.svg', 'white', 'white', '', ['WayShrines']),
+            addPin("Wayshrine Mohki", "WayShrine based on the island south of town. At the southern end of the island", 2680, 1690, 'Icons/DungeonIcon.svg', 'white', 'white', '', ['WayShrines']),
+            addPin("Wayshrine Fabernum", "WayShrine is out of town, 800m south west across the river and up a hill. Generally safe to run naked on foot from town. ", 1170, 3160, 'Icons/DungeonIcon.svg', 'white', 'white', '', ['WayShrines']),
+            addPin("Wayshrine Hyllspeia", "Down the ramp, 300m past the second hairpin.", 1270, 3580, 'Icons/DungeonIcon.svg', 'blue', 'blue', '', ['WayShrines']),
+            addPin("Wayshrine Morin Khur", "WayShrine is southern side of canyon, go north of town to the base of the Tower near the cliffs.", 3190, 2623, 'Icons/DungeonIcon.svg', 'white', 'white', '', ['WayShrines']),
+            addPin("Wayshrine Cave Camp", "Approx 700m south of the camp on a hilltop. Generally safe to make it naked on foot ", 2460, 3280, 'Icons/DungeonIcon.svg', 'white', 'white', '', ['WayShrines']),   
+            addPin("Wayshrine Gaul'Kor", "It's right off the main road going into town, there will be a cliff above you on the NE that makes it difficult to find unless you're looking for it.", 3520, 3800, 'Icons/DungeonIcon.svg', 'white', 'white', '', ['WayShrines']),   
+            addPin("Wayshrine Marlwood", "WayShrine on the western side of the Fishing Vendor Lakes, its in the trees maybe 100m from the lake", 3370, 1490, 'Icons/VillageIcon.svg', 'white', 'white', '', ['WayShrines']),
+            addPin("Wayshrine Central Steppe", "Due west of the Eastern Steppe Outpost", 2140, 2470, 'Icons/DungeonIcon.svg', 'white', 'white', '', ['WayShrines']),
+            
             //Outposts
-            addPin("Outpost Test", "", 2045, 1800, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost South Canteri", "", 1680, 410, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Western Brood Isles", "", 1965, 265, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),     
+            addPin("Outpost Western Stairs", "", 2280, 610, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),     
+            addPin("Outpost Eastern Stairs", "", 2795, 755, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),     
+            addPin("Outpost Eastern Brood Isles", "", 3435, 380, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),     
+            addPin("Outpost Sunken Isles", "", 650, 490, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),     
+            addPin("Outpost North Canteri", "", 960, 870, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),     
+            addPin("Outpost Tekton's Heel", "", 290, 1380, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),     
+            addPin("Outpost Meduli Badlands", "", 570, 1440, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),     
+            addPin("Outpost Landfall", "", 1420, 1300, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Southern Greatwoods", "", 2035, 1350, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Eastern Greatwoods", "", 2610, 1620, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Western Greatwoods", "", 1450, 1730, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Marlwood", "", 3640, 1130, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Southern Steppe", "", 2100, 1850, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Eastern Steppe", "", 2210, 2500, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Eastern Glen", "", 3570, 1790, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Eastern Moorland", "", 2850, 2070, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Western Steppe", "", 1250, 2070, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Plains of Meduli", "", 600, 2140, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Western Coastlands", "", 280, 2560, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Tindremic Midlands", "", 550, 2550, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Tindremic Heartlands", "", 290, 2890, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Colored Forest", "", 1115, 2710, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Green Weald", "", 1365, 3400, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Western Talus Mountains", "", 1200, 3870, 'Icons/SHIcon.svg', 'blue', 'blue', '', ['Outposts']),
+            addPin("Outpost Northern Valley", "", 1690, 3210, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Deepwood", "", 2000, 2860, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Central Talus Mountains", "", 2030, 3450, 'Icons/SHIcon.svg', 'blue', 'blue', '', ['Outposts']),
+            addPin("Outpost Northern Foothills", "", 2630, 3450, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Eastern Highlands", "", 2770, 2640, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Bullhead Gulch", "", 3150, 2910, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Gaul'Kor Wastes", "", 3730, 3290, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
+            addPin("Outpost Khurite Bluffs", "", 3520, 2450, 'Icons/SHIcon.svg', 'white', 'white', '', ['Outposts']),
             
             //Keeps
-            addPin("Artisan Keep", "WTB Granum", 1470, 750, 'Icons/KeepIcon.svg', 'white', 'white', '', ['Keeps']),
+            addPin("Artisan Keep", "WTB Granum", 1470, 750, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
             addPin("Legio Keep", "King Petbroker's domain", 570, 530, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
             addPin("Grimside Keep", "", 2295, 1390, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
-            addPin("NewDawn Keep", "", 3020, 1345, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
-            addPin("Imperial Dreams Keep", "", 3490, 1325, 'Icons/KeepIcon.svg', 'white', 'white', '', ['Keeps']),
-            addPin("OdinSeed", "", 2190, 3450, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
-            addPin("OdinSeed2", "", 2200, 2720, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
-            addPin("Empire", "", 3080, 2210, 'Icons/KeepIcon.svg', 'white', 'white', '', ['Keeps']),
-            addPin("BadCo Keep", "", 1985, 1900, 'Icons/KeepIcon.svg', 'white', 'white', '', ['Keeps']),
-            addPin("RUIN", "", 935, 1395, 'Icons/KeepIcon.svg', 'white', 'white', '', ['Keeps']),
+            addPin("Imperium Ferro Keep", "", 3020, 1345, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
+            addPin("Imperial Dreams Keep", "", 3490, 1325, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
+            addPin("OdinSeed Keep", "", 2190, 3450, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
+            addPin("OdinSeed Keep", "", 2200, 2720, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
+            addPin("Empire Keep", "", 3080, 2210, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
+            addPin("BadCo Keep", "", 1985, 1900, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
+            addPin("RUIN Keep", "", 935, 1395, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
+            addPin("WINX Keep", "", 1200, 2160, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
+            addPin("Koto Keep", "", 810, 2560, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
+            addPin("North Order Keep", "", 1600, 2690, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
+            addPin("Wanted Keep", "", 2650, 2550, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
+            addPin("Battle Bros Keep", "", 2900, 3410, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
+            addPin("KarniMata Keep", "", 3740, 3480, 'Icons/KeepIcon.svg', 'cyan', 'cyan', '', ['Keeps']),
             
             //Area Names - white torch
             addPin("Kush", "Priest, Bank, Stables", 2610, 580, 'Icons/VillageIcon.svg', 'white', 'white', '', ['JArea']),   
@@ -465,7 +569,7 @@
             addPin("Waterfall", "", 2720, 575, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
             addPin("Dry River", "", 2730, 620, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
             addPin("Top Ramp", "", 2835, 600, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
-            addPin("Spider Valley", "", 1390, 1440, 'Icons/TorchIcon.svg', 'white', 'white'),
+            addPin("Spider Valley", "", 1390, 1440, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
             addPin("Sausage Lake", "", 1985, 2050, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
             addPin("Bridge", "", 1600, 1000, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
             addPin("Cursed Pass", "", 1990, 880, 'Icons/TorchIcon.svg', 'white', 'white', '', ['JArea']),
@@ -488,7 +592,7 @@
             addPin("Mohki", "", 2680, 1790, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
             addPin("Vadda", "", 1690, 1810, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
             addPin("Meduli", "", 430, 2123, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
-            addPin("Tindrem", "", 500, 3130, 'Icons/VillageIcon.svg', 'blue', 'purple', '', ['NPC']),
+            addPin("Tindrem", "", 500, 3130, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
             addPin("Fabernum", "", 1300, 3200, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
             addPin("Hyllspeia", "", 1320, 3580, 'Icons/VillageIcon.svg', 'blue', 'purple', '', ['NPC']),
             addPin("Morin Khur", "", 3280, 2623, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
@@ -496,6 +600,7 @@
             addPin("Cave Camp", "", 2460, 3330, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),   
             addPin("Jungle Camp", "", 2800, 550, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
             addPin("Kranesh", "", 1550, 2960, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
+            addPin("Gaul'Kor", "", 3470, 3850, 'Icons/VillageIcon.svg', 'white', 'purple', '', ['NPC']),
             
             //Dungeons - white
             addPin("Shinarian Labyrinth", "Jungle Dungeon", 2570, 600, 'Icons/DungeonIcon.svg', 'white', 'white', 'https://destillaah.github.io/MortalARTmap//ShinarianLabyrinth.html', ['Dung']),
@@ -570,45 +675,42 @@
             addPin("Jaguar", "", 2930, 575, 'Icons/SHIcon.svg', 'white', 'lime', '', ['Tribe']),
             addPin("FortBoyard", "", 2905, 620, 'Icons/SHIcon.svg', 'white', 'lime', '', ['Tribe']),
             addPin("Old Tribe", "Bank, Priest, Stable", 2865, 530, 'Icons/VillageIcon.svg', 'white', 'lime', '', ['Tribe']),
-            
-            //Onyx - Blue
-             addPin("Canterri Paradise", "Bank, Priest, MagicEmp", 1065, 580, 'Icons/HouseIcon.svg', 'white', 'blue', '', ['ONYX']),
-            
+                    
             //OS Alliance
-            addPin("SaltPact", "", 1650, 3150, 'Icons/VillageIcon.svg', 'cyan', 'cyan'),
-            addPin("Odin Post", "", 1900, 3430, 'Icons/VillageIcon.svg', 'cyan', 'cyan'),
-            addPin("Odin's Flame", "Priest, Bank, Stable", 2200, 3600, 'Icons/VillageIcon.svg', 'cyan', 'cyan'),
+
             
-            //ImperiumFerro
-            addPin("The Ridge", "IF Capital", 1415, 1230, 'Icons/VillageIcon.svg', 'cyan', 'cyan', '', ['IF']),
-            addPin("Holy House", "IF, All facilities", 480, 2880, 'Icons/VillageIcon.svg', 'cyan', 'cyan', '', ['IF']),
-            addPin("Rogir's hall", "IF, All refining", 2970, 3300, 'Icons/VillageIcon.svg', 'cyan', 'cyan', '', ['IF']),
-            addPin("Exarxeia", "IF, Priest, Vendors", 3730, 3110, 'Icons/VillageIcon.svg', 'cyan', 'cyan', '', ['IF']),
-            addPin("Mudhut", "IF", 3640, 3465, 'Icons/HouseIcon.svg', 'cyan', 'cyan', '', ['IF']),
-            addPin("Calo's House", "IF", 1995, 335, 'Icons/HouseIcon.svg', 'cyan', 'cyan', '', ['IF']),
-            addPin("Zhe Den", "IF", 1345, 815, 'Icons/SHIcon.svg', 'cyan', 'cyan', '', ['IF']),
-            addPin("Pink Panther", "IF", 2775, 580, 'Icons/HouseIcon.svg', 'cyan', 'cyan', '', ['IF']),
-            
-            // Other ally pins - cyan
-            addPin("MonkFish", "", 1960, 515, 'Icons/VillageIcon.svg', 'cyan', 'cyan'),
-            addPin("NewDawn Campos", "", 1590, 290, 'Icons/VillageIcon.svg', 'cyan', 'cyan'),
-            addPin("Tartarians", "", 2745, 670, 'Icons/VillageIcon.svg', 'cyan', 'cyan'),
-            addPin("Rohirrim", "", 1375, 755, 'Icons/VillageIcon.svg', 'cyan', 'cyan'),
+            //Other Alliance
+            addPin("The Ridge", "IF Capital", 1415, 1230, 'Icons/VillageIcon.svg', 'cyan', 'cyan', '', ['ALL']),
+            addPin("Holy House", "IF, All facilities", 480, 2880, 'Icons/VillageIcon.svg', 'cyan', 'cyan', '', ['ALL']),
+            addPin("Rogir's hall", "IF, All refining", 2970, 3300, 'Icons/VillageIcon.svg', 'cyan', 'cyan', '', ['ALL']),
+            addPin("Exarxeia", "IF, Priest, Vendors", 3730, 3110, 'Icons/VillageIcon.svg', 'cyan', 'cyan', '', ['ALL']),
+            addPin("Mudhut", "IF", 3640, 3465, 'Icons/HouseIcon.svg', 'cyan', 'cyan', '', ['ALL']),
+            addPin("Calo's House", "IF", 1995, 335, 'Icons/HouseIcon.svg', 'cyan', 'cyan', '', ['ALL']),
+            addPin("Zhe Den", "IF", 1345, 815, 'Icons/SHIcon.svg', 'cyan', 'cyan', '', ['ALL']),
+            addPin("Pink Panther", "IF", 2775, 580, 'Icons/HouseIcon.svg', 'cyan', 'cyan', '', ['ALL']),
+             addPin("Canterri Paradise", "Bank, Priest, MagicEmp", 1065, 580, 'Icons/HouseIcon.svg', 'white', 'blue', '', ['ALL']),
+            addPin("SaltPact", "", 1650, 3150, 'Icons/VillageIcon.svg', 'cyan', 'cyan', '', ['ALL']),
+            addPin("Odin Post", "", 1900, 3430, 'Icons/VillageIcon.svg', 'cyan', 'cyan', '', ['ALL']),
+            addPin("Odin's Flame", "Priest, Bank, Stable", 2200, 3600, 'Icons/VillageIcon.svg', 'cyan', 'cyan', '', ['ALL']),
+            addPin("MonkFish", "", 1960, 515, 'Icons/VillageIcon.svg', 'cyan', 'cyan', '', ['ALL']),
+            addPin("NewDawn Campos", "", 1590, 290, 'Icons/VillageIcon.svg', 'cyan', 'cyan', '', ['ALL']),
+            addPin("Tartarians", "", 2745, 670, 'Icons/VillageIcon.svg', 'cyan', 'cyan', '', ['ALL']),
+            addPin("Rohirrim", "", 1375, 755, 'Icons/VillageIcon.svg', 'cyan', 'cyan', '', ['ALL']),
             
             //No Allies - find color
-            addPin("Ruin/FreeCompany Village", "", 1070, 800, 'Icons/VillageIcon.svg', 'red', 'red'),
-            addPin("UBG", "", 1050, 740, 'Icons/VillageIcon.svg', 'red', 'red'),
-            addPin("Big POI Village", "", 880, 880, 'Icons/VillageIcon.svg', 'red', 'red'),
-            addPin("HedgeKnights", "", 950, 965, 'Icons/VillageIcon.svg', 'red', 'red'),
-            addPin("Koto Village", "", 945, 760, 'Icons/VillageIcon.svg', 'red', 'red'),
-            addPin("LakePikes", "Priest, Bank, Stable", 3450, 490, 'Icons/VillageIcon.svg', 'white', 'white'),
-            addPin("Some Randomness", "", 1265, 110, 'Icons/SHIcon.svg', 'red', 'red'),
-            addPin("KM village", "", 2610, 480, 'Icons/VillageIcon.svg', 'red', 'red'),   
-            addPin("Old Slav", "Old Coalition Village", 2650, 630, 'Icons/VillageIcon.svg', 'red', 'red'),
-            addPin("Old Purg", "Old Purgatory/UBG Village", 2650, 670, 'Icons/VillageIcon.svg', 'white', 'white'),
-            addPin("Wolf", "", 1460, 890, 'Icons/SHIcon.svg', 'white', 'white'),
-            addPin("DirtyDozen", "", 1480, 575, 'Icons/VillageIcon.svg', 'white', 'white'),
-            addPin("Please Be Nice", " ", 1840, 765, '', 'pink', 'pink', '', ['BLUE']), 
+            addPin("Ruin/FreeCompany Village", "", 1070, 800, 'Icons/VillageIcon.svg', 'red', 'red', '', ['OTHER']),
+            addPin("UBG", "", 1050, 740, 'Icons/VillageIcon.svg', 'red', 'red', '', ['OTHER']),
+            addPin("Big POI Village", "", 880, 880, 'Icons/VillageIcon.svg', 'red', 'red', '', ['OTHER']),
+            addPin("HedgeKnights", "", 950, 965, 'Icons/VillageIcon.svg', 'red', 'red', '', ['OTHER']),
+            addPin("Koto Village", "", 945, 760, 'Icons/VillageIcon.svg', 'red', 'red', '', ['OTHER']),
+            addPin("LakePikes", "Priest, Bank, Stable", 3450, 490, 'Icons/VillageIcon.svg', 'white', 'white', '', ['OTHER']),
+            addPin("Some Randomness", "", 1265, 110, 'Icons/SHIcon.svg', 'red', 'red', '', ['OTHER']),
+            addPin("KM village", "", 2610, 480, 'Icons/VillageIcon.svg', 'red', 'red', '', ['OTHER']),   
+            addPin("Old Slav", "Old Coalition Village", 2650, 630, 'Icons/VillageIcon.svg', 'red', 'red', '', ['OTHER']),
+            addPin("Old Purg", "Old Purgatory/UBG Village", 2650, 670, 'Icons/VillageIcon.svg', 'white', 'white', '', ['OTHER']),
+            addPin("Wolf", "", 1460, 890, 'Icons/SHIcon.svg', 'white', 'white', '', ['OTHER']),
+            addPin("DirtyDozen", "", 1480, 575, 'Icons/VillageIcon.svg', 'white', 'white', '', ['OTHER']),
+            addPin("Please Be Nice", " ", 1840, 765, '', 'pink', 'pink', '', ['OTHER']), 
             
             //Red Priests
             addPin("", "Turtle beach Red Priest", 1100, 260, 'Icons/PriestIcon.svg', 'red', 'red', '', ['RPriest']),
