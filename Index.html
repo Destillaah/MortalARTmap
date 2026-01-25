@@ -192,7 +192,7 @@
                 <div class="filter-title">Guilds</div>
                 <div class="filter-options">
                     <label><input type="checkbox" value="ARTS" checked> Artisans - Strongholds</label>
-                    <label><input type="checkbox" value="ART"> Artisan - Houses</label>
+                    <label><input type="checkbox" value="ART" checked> Artisan - Houses</label>
                     <label><input type="checkbox" value="Pillow"> Pillows</label>
                     <label><input type="checkbox" value="Tribe"> Tribe</label>
                     <label><input type="checkbox" value="GS"> Grimside</label>
@@ -370,7 +370,7 @@
                 }
             });
         }
-        let activeTags = new Set(['NPC', 'Towns', 'ARTS']); // initially show all
+        let activeTags = new Set(['NPC', 'Towns', 'ARTS', 'ART']); // initially show all
         
         
         // Function to add a pin with a scalable icon and visible name
@@ -432,7 +432,6 @@
             addPin("North GlimLake", "", 1690, 740, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),            
             addPin("KillaTheRotten", "", 1690, 500, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),  
             addPin("Stronghold", "", 1440, 375, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),  
-            
             addPin("Harpos", "", 1110, 700, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),            
             addPin("Assassins Pass", "", 1940, 700, 'Icons/SHIcon.svg', 'white', 'white', '', ['ARTS']),            
             
@@ -483,15 +482,26 @@
             addPin("SHA", "MagicEmp", 1385, 675, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
             addPin("BonkerHill", "", 2290, 545, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
             addPin("Fish light", "", 1890, 310, 'Icons/SHIcon.svg', 'white', 'white', '', ['ART']),
-
             addPin("Minophilia", "", 1900, 3460, 'Icons/HouseIcon.svg', 'blue', 'blue', '', ['ART']),
             addPin("GranumTerrace", "", 1535, 1230, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
             addPin("POIJuicers", "", 1510, 580, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
             addPin("House of Wang", "", 1735, 1175, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
             addPin("Panthoff", "MagicEmp", 2785, 585, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
             addPin("BonkerBeach", "", 2560, 330, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),
+            addPin("TheJukeJoint", "", 1540, 790, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ARTS']),
+            addPin("StormHearth", "", 1530, 800, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ARTS']),
+            addPin("Low Road Depot", "", 1520, 810, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ARTS']),
+            addPin("MoesTavern", "", 1595, 780, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ARTS']),
+            addPin("KhabibTavern", "", 1605, 770, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ARTS']),           
+            addPin("DingleDen", "", 1610, 785, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ARTS']),
+            addPin("BackRoadXfer", "", 1595, 820, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ARTS']),   
+            addPin("Alpha", "", 1595, 870, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ARTS']),   
+            addPin("Echo", "", 1600, 860, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ARTS']),             
+            addPin("GranumGooch", "", 1740, 880, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ARTS']),            
+            addPin("CaveTwo", "", 1800, 870, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ARTS']),            
+            addPin("Cave", "", 1810, 880, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ARTS']),            
+            addPin("Recruitment Centre", "", 1880, 1225, 'Icons/HouseIcon.svg', 'white', 'white', '', ['ART']),            
             
-        
             //Wayshrines
             addPin("Wayshrine Canteri", "Eastern side of Glimmer Cap Lakes", 1695, 645, 'Icons/DungeonIcon.svg', 'white', 'white', '', ['WayShrines']),
             addPin("Wayshrine Jungle Camp", "From Jungle Camp, go east then south down the ramp, continue south about 500m. Big rock mountain on left, keep it on your left, go towards the south of it and up a ramp on your left to the top. Panthers between Jungle Camp and WayShrine, you will not make it naked on foot.", 2830, 475, 'Icons/DungeonIcon.svg', 'white', 'white', '', ['WayShrines']),
