@@ -43,7 +43,7 @@
         }
         
 
-        #toggle-overlay {
+        #toggle-priest-overlay {
             background-color: rgba(0, 0, 0, 0.7);
             color: white;
             font-size: 16px;
@@ -52,7 +52,20 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        #toggle-overlay:hover {
+        #toggle-priest-overlay:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        
+        #toggle-wayshrine-overlay {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 16px;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #toggle-wayshrine-overlay:hover {
             background-color: rgba(0, 0, 0, 0.9);
         }
         
@@ -171,7 +184,8 @@
     <!-- Map Container -->
     <div id="map"></div>
     <div id="control-panel">
-        <button id="toggle-overlay">Priest Zones</button>
+        <button id="toggle-priest-overlay">Priest Zones</button>
+        <button id="toggle-wayshrine-overlay">Wayshrine Zones</button>
         <input type="text" id="search-bar" placeholder="Search pins..." />
         <!--These are the filter panels-->
         <div id="filter-panel">
@@ -250,10 +264,18 @@
         const bounds = [[0, 0], [imageSize[1], imageSize[0]]];
         L.imageOverlay(imageUrl, bounds).addTo(map);
         
-        // Define overlay image (same size as base)
-        const overlayUrl = 'Images/MOPriestZones.png';       
-        const overlayLayer = L.imageOverlay(overlayUrl, bounds, { opacity: 1 });
-        let overlayVisible = false; // Start hidden  
+
+
+        // Priest overlay
+        const priestOverlayUrl = 'Images/PriestOverlay.png';
+        const priestOverlayLayer = L.imageOverlay(priestOverlayUrl, bounds, { opacity: 1 });
+        let priestOverlayVisible = false;
+
+        // WayShrine overlay
+        const wayshrineOverlayUrl = 'Images/WayShrineOverlay.png';
+        const wayshrineOverlayLayer = L.imageOverlay(wayshrineOverlayUrl, bounds, { opacity: 1 });
+        let wayshrineOverlayVisible = false;
+        
         
         // Define map bounds
         
@@ -755,19 +777,35 @@
         map.on('zoomend', updateIconSizes);
         updateIconSizes(); // Initialize scaling
      
-    document.getElementById('toggle-overlay').addEventListener('click', function () {
-    if (overlayVisible) 
-    {
-        map.removeLayer(overlayLayer);
-        this.textContent = 'Show Overlay';
-    } 
-    else 
-    {
-        overlayLayer.addTo(map);
-        this.textContent = 'Hide Overlay';
-    }
-    overlayVisible = !overlayVisible;
+
+    document.getElementById('toggle-priest-overlay').addEventListener('click', function () {
+        if (priestOverlayVisible) {
+            map.removeLayer(priestOverlayLayer);
+            this.textContent = 'Priest Zones';
+        } else {
+            priestOverlayLayer.addTo(map);
+            this.textContent = 'Hide Priest Zones';
+        }
+        priestOverlayVisible = !priestOverlayVisible;
+    });
+
+    document.getElementById('toggle-wayshrine-overlay').addEventListener('click', function () {
+        if (wayshrineOverlayVisible) {
+            map.removeLayer(wayshrineOverlayLayer);
+            this.textContent = 'WayShrine Zones';
+        } else {
+            wayshrineOverlayLayer.addTo(map);
+            this.textContent = 'Hide WayShrine Zones';
+        }
+        wayshrineOverlayVisible = !wayshrineOverlayVisible;
     });    
+        
+        
+        
+        
+        
+        
+      
     
          function bindFilterCheckboxes(){
             const allCheckboxes = document.querySelectorAll('#filter-panel input[type="checkbox"]');
